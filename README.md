@@ -1,6 +1,6 @@
 # spec_app
 
-A new Flutter application.
+A flutter app for students of National Institute of Technology Hamirpur.
 
 ## Getting Started
 
