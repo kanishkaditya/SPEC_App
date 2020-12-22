@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "95474608274",
+    "project_id": "spec-app-cb0ad",
+    "storage_bucket": "spec-app-cb0ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95474608274:android:b19bd76152cc18bd091e4b",
+        "android_client_info": {
+          "package_name": "com.SPECNith.App"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95474608274-bf9teb4uro62hgpukf9995ka8k85qhah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.SPECNith.App",
+            "certificate_hash": "41c6d926f2e76ba3a04d7fde7f199ea050fa6682"
+          }
+        },
+        {
+          "client_id": "95474608274-9h1rg6lu5dh829vn14h6fvv5u3uvvtor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEKIJ30wNaQNqSdM54Zjzez3ln0x0G8ws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95474608274-9h1rg6lu5dh829vn14h6fvv5u3uvvtor.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
