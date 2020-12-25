@@ -4,6 +4,7 @@ import 'AuthService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'CustormTextField.dart';
 import 'FirstScreen.dart';
+import 'register.dart';
 
 AuthService service;
 FirebaseUser user;
@@ -24,8 +25,8 @@ Future<void> main() async {
     user=await service.signInWithGoogle();
     print(user.displayName+" "+user.email);
   }
-  return runApp(MaterialApp(home:!isLoggedIn? LoginPage(title:'Login Page'):FirstScreen()));
-
+  //return runApp(MaterialApp(home:!isLoggedIn? LoginPage(title:'Login Page'):FirstScreen()));
+  return runApp(MaterialApp(home: Register(),));
 }
 
 
@@ -143,7 +144,7 @@ class _LoginPage extends State<LoginPage> {
                     iconSize:48,
                     onPressed: () {
                       service.signInWithGoogle().whenComplete(
-                          (){if(user!=null) {
+                          () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
@@ -152,7 +153,7 @@ class _LoginPage extends State<LoginPage> {
                           ),
                         );
                       }
-                          }
+
                           );
                     }
                     ),
