@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'AuthService.dart';
+import 'Helper/AuthService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'CustormTextField.dart';
-import 'FirstScreen.dart';
 import 'register.dart';
+import 'Helper/CustormTextField.dart';
+import 'Helper/Handler.dart';
+
 
 AuthService service;
 FirebaseUser user;
@@ -25,20 +26,17 @@ Future<void> main() async {
     user=await service.signInWithGoogle();
     print(user.displayName+" "+user.email);
   }
-  //return runApp(MaterialApp(home:!isLoggedIn? LoginPage(title:'Login Page'):FirstScreen()));
-  return runApp(MaterialApp(home: Register(),));
+  return runApp(MaterialApp(
+      routes:{
+        '/LoginPage':(context)=>LoginPage(title:'Login Page'),
+        '/Handler':(context)=>MyApp(),
+      },
+      initialRoute: isLoggedIn?'/Handler':'/LoginPage',
+  )
+  );
 }
 
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage(title: 'Login page'),
-    );
-  }
-}
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -51,7 +49,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPage extends State<LoginPage> {
   bool isvalid=true;
   bool isPasswordValid=true;
-  TextEditingController controller=TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String _email;
   String _pass;
@@ -91,7 +88,7 @@ class _LoginPage extends State<LoginPage> {
                         .hasMatch(input)?"*Please enter a valid email address":null;
                   }
               ),
-            CustomTextField(
+             CustomTextField(
                 icon:Icon(Icons.lock),
                 obsecure: true,
                 onChanged: (input) =>{_pass=input},
@@ -118,7 +115,6 @@ class _LoginPage extends State<LoginPage> {
                 children: <Widget>[
                   ElevatedButton(
                       onPressed: ()async{
-
                         int check=await service.SignIn(_email, _pass);
                         if(check==-1)
                           {formKey.currentState.setState(() {
@@ -144,25 +140,18 @@ class _LoginPage extends State<LoginPage> {
                     iconSize:48,
                     onPressed: () {
                       service.signInWithGoogle().whenComplete(
-                          () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return FirstScreen();
-                            },
-                          ),
+                          (){
+                            Navigator.pushReplacementNamed(context, '/Handler',);
+                          }
                         );
-                      }
-
-                          );
-                    }
-                    ),
+                          }
+                          ),
                 ],
-            ),
+                    ),
             ),
           ],
-        ),
-      ),
+            ),
+            ),
     );
   }
 }

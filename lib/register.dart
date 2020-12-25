@@ -42,7 +42,7 @@ class _RegisterState extends State<Register> {
                 children: [
                   CircleAvatar(
                     radius: 45,
-                    backgroundImage: _imageFile == null? AssetImage("assets/default_image.png"): FileImage(File(_imageFile.path)),
+                    backgroundImage: _imageFile == null? AssetImage("assets/Image/default_image.png"): FileImage(File(_imageFile.path)),
                   ) ,
                   Positioned(
                     bottom: 14,
