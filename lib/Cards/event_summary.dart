@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:spec_app/Objects/Event.dart';
 
-class EventSummary extends StatelessWidget {
+class EventSummary extends StatefulWidget {
+  Event e;
+
+  EventSummary({this.e});
+
+
+  @override
+  _EventSummaryState createState() => _EventSummaryState(e);
+}
+
+class _EventSummaryState extends State<EventSummary> {
+  Event event;
+  _EventSummaryState(this.event);
   @override
   Widget build(BuildContext context) => Container(
       width: double.infinity,
@@ -9,6 +22,6 @@ class EventSummary extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 14.0),
         child: MaterialButton(
-            child: Text('Hello')),
+            child: Text(event.summary)),
       ));
 }

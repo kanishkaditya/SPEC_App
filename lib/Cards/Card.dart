@@ -35,7 +35,7 @@ class _CardState extends State<Cards> {
     _isOpen = false;
     frontCard =EventCard(event:widget.event,theme:SummaryTheme.dark);
     middleCard = EventDetails(widget.event);
-    bottomCard = EventSummary();
+    bottomCard = EventSummary(e:widget.event);
   }
 
   @override

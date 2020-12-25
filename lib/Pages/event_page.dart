@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/kanishkaditya/AndroidStudioProjects/spec_app/lib/Cards/Card.dart';
+import 'package:spec_app/Cards/Card.dart';
 import '../Objects/Event.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

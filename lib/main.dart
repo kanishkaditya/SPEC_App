@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Helper/AuthService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'register.dart';
 import 'Helper/CustormTextField.dart';
 import 'Helper/Handler.dart';
+
 
 AuthService service;
 FirebaseUser user;
