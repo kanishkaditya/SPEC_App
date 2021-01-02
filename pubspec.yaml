@@ -36,6 +36,8 @@ dependencies:
   shared_preferences: ^0.5.12+4
   rxdart: 0.20.0
   image_picker: ^0.6.7+17
+  table_calendar: ^2.3.3
+  intl: ^0.16.1
   http:
 dev_dependencies:
   flutter_test:

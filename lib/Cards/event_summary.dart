@@ -21,7 +21,6 @@ class _EventSummaryState extends State<EventSummary> {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0), color: Colors.white),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 14.0),
-        child: MaterialButton(
-            child: Text(event.summary)),
+        child: Text(event.summary),
       ));
 }

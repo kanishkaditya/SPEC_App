@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'navigationDrawer.dart';
+
 class Home extends StatefulWidget {
   const Home({
     Key key,
@@ -19,6 +21,9 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text('SPEC',style:TextStyle(color:Colors.black)),
+      ),
+      drawer: Drawer(
+        child: NavigationDrawer(),
       ),
     );
   }
