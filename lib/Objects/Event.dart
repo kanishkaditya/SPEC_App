@@ -8,7 +8,6 @@ class Event{
   String prize2;
   String prize3;
   String summary;
-
   Event(result)
   {
     name=result['name'];
@@ -21,4 +20,5 @@ class Event{
     prize3=result['prize3'];
     summary=result['summary'];
   }
+
 }

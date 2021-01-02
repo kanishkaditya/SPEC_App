@@ -102,24 +102,24 @@ class EventCard extends StatelessWidget {
   Widget _buildCardHeader(context) {
 
     return Container(
-      height: 80,
+        height: 80,
         width: 80,
         child:FittedBox(
-      child:Image.network(
-        event.image_url,
-          loadingBuilder: (context,child,loadingProgress)
-        {
-          if(loadingProgress==null)
-            return child;
-          return Center(child:CircularProgressIndicator(
-            value:loadingProgress.expectedTotalBytes!=null?loadingProgress
-                .cumulativeBytesLoaded/loadingProgress.expectedTotalBytes:null,
-          ),
-          widthFactor: 2,
-          heightFactor: 2,);
-        }
-          ,),
-      fit:BoxFit.fill,
-    ));
+          child:Image.network(
+            event.image_url,
+            loadingBuilder: (context,child,loadingProgress)
+            {
+              if(loadingProgress==null)
+                return child;
+              return Center(child:CircularProgressIndicator(
+                value:loadingProgress.expectedTotalBytes!=null?loadingProgress
+                    .cumulativeBytesLoaded/loadingProgress.expectedTotalBytes:null,
+              ),
+                widthFactor: 2,
+                heightFactor: 2,);
+            }
+            ,),
+          fit:BoxFit.fill,
+        ));
   }
 }

@@ -6,12 +6,12 @@ import 'package:spec_app/Objects/Event.dart';
 class EventDetails extends StatelessWidget {
   final Event event;
   final TextStyle titleTextStyle = TextStyle(
-      fontFamily: 'OpenSans',
-      fontSize: 11,
-      height: 1,
-      letterSpacing: .2,
-      fontWeight: FontWeight.w600,
-      color: Color(0xffafafaf),);
+    fontFamily: 'OpenSans',
+    fontSize: 11,
+    height: 1,
+    letterSpacing: .2,
+    fontWeight: FontWeight.w600,
+    color: Color(0xffafafaf),);
   final TextStyle contentTextStyle =
   TextStyle(fontFamily: 'Oswald', fontSize: 16, height: 1.8, letterSpacing: .3, color: Color(0xff083e64),);
 

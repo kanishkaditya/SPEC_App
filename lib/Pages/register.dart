@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
-
+import 'package:spec_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -13,8 +13,12 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _emailController=TextEditingController();
+  final _name=TextEditingController();
+  final _surname=TextEditingController();
+
   bool isvalid=true;
-  PickedFile _imageFile;
+  File _imageFile;
   final ImagePicker _picker = ImagePicker();
 
   @override
@@ -43,7 +47,7 @@ class _RegisterState extends State<Register> {
                   CircleAvatar(
                     radius: 45,
                     backgroundImage: _imageFile == null? AssetImage("assets/Image/default_image.png"): FileImage(File(_imageFile.path)),
-                  ) ,
+                  ),
                   Positioned(
                     bottom: 14,
                     right: 12,
@@ -68,6 +72,7 @@ class _RegisterState extends State<Register> {
                     }
                     return null;
                   },
+                  controller:_name,
                   decoration: InputDecoration(
                     labelText: "Name",
                     icon: Icon(Icons.account_circle , size: 30,),
@@ -78,6 +83,7 @@ class _RegisterState extends State<Register> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller:_surname,
                   decoration: InputDecoration(
                       labelText: "Surname",
                      icon: Icon(Icons.account_circle , size: 30,)
@@ -94,6 +100,7 @@ class _RegisterState extends State<Register> {
                       return !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                           .hasMatch(value)?"*Please enter a valid email address":null;
                     },
+                  controller: _emailController,
                   decoration: InputDecoration(
                       labelText: "Email",
                       icon: Icon(Icons.email , size: 30,)
@@ -110,13 +117,12 @@ class _RegisterState extends State<Register> {
                       return "Password cant be null";
                     }
                     else if(value.length < 6){
-                      return "Password must be at leasr 6 characters";
+                      return "Password must be at least 6 characters";
                     }
                     return null;
                   },
                   decoration: InputDecoration(
                       labelText: "Password",
-                      hintText: "Enter your Password",
                       icon: Icon(Icons.lock , size: 30,)
                   ),
                 ),
@@ -139,8 +145,17 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               FloatingActionButton(
-                onPressed: (){
-                  _formKey.currentState.validate();
+                onPressed: ()async{
+                 if(_formKey.currentState.validate())
+                   {
+                     String name=_name.value.text;
+                     String surname=_surname.value.text;
+                     String email=_emailController.value.text;
+                     String password=_passwordController.value.text;
+                     user=await service.SignUp(name,surname,email,password,_imageFile);
+                     if(user!=null)
+                       {Navigator.pushReplacementNamed(context, '/Handler',);}
+                   }
                 },
                 child: Icon(Icons.done),
 
@@ -150,13 +165,14 @@ class _RegisterState extends State<Register> {
         );
   }
 
-  void TakePhoto(ImageSource source) async{
+  void TakePhoto(ImageSource source) async
+  {
     final PickedFile = await _picker.getImage(
       source: source,
     );
 
     setState(() {
-      _imageFile = PickedFile;
+      _imageFile = File(PickedFile.path);
     });
   }
 
@@ -186,10 +202,9 @@ class _RegisterState extends State<Register> {
                 },
               )
             ],
-          )
+          ),
         ],
       ),
-
     );
   }
 }
