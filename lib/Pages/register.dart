@@ -4,7 +4,7 @@ import 'package:spec_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class Register extends StatefulWidget {
+class Register extends StatefulWidget{
   @override
   _RegisterState createState() => _RegisterState();
 }

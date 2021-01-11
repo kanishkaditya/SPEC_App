@@ -3,15 +3,14 @@ import 'package:flutter/widgets.dart';
 import 'package:spec_app/Objects/Event.dart';
 
 
-
 enum SummaryTheme { dark, light }
 
 class EventCard extends StatelessWidget {
   final Event event;
   final SummaryTheme theme;
   final bool isOpen;
-
-  const EventCard({Key key, this.event, this.theme = SummaryTheme.light, this.isOpen = false}):super(key: key);
+  final EdgeInsets margin;
+  const EventCard({Key key, this.event, this.theme = SummaryTheme.light, this.isOpen = false,this.margin=EdgeInsets.zero}):super(key: key);
 
   Color get mainTextColor {
     Color textColor;
@@ -39,6 +38,7 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin:margin,
       decoration: _getBackgroundDecoration(),
       width: double.infinity,
       height: double.infinity,

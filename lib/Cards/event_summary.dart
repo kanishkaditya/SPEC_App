@@ -20,7 +20,7 @@ class _EventSummaryState extends State<EventSummary> {
       width: double.infinity,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0), color: Colors.white),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 14.0),
-        child: Text(event.summary),
+        padding: const EdgeInsets.only(left: 50.0,top: 15.0),
+        child:Text(event.summary),
       ));
 }
