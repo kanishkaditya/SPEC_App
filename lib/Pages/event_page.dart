@@ -6,13 +6,13 @@ import 'package:spec_app/Cards/Card.dart';
 import '../Objects/Event.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+List<Event> events = [];
 class Event_Page extends StatefulWidget {
   @override
   _EventsState createState() => _EventsState();
 }
 
 class _EventsState extends State<Event_Page> with AutomaticKeepAliveClientMixin {
-  List<Event> events = [];
 
   final ScrollController _scrollController = ScrollController();
   final List<int> _openCards = [];
@@ -96,7 +96,7 @@ class _EventsState extends State<Event_Page> with AutomaticKeepAliveClientMixin 
     // Scroll to the clicked element
     if (_scrollController.hasClients)
       _scrollController.animateTo(max(0, offset),
-          duration: Duration(seconds: 2),
+          duration: Duration(seconds: 1),
           curve: Interval(.25, 1, curve: Curves.easeOutQuad));
     // Return true to stop the notification propagation
     return true;

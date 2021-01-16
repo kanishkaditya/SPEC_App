@@ -3,8 +3,6 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:spec_app/Helper/navbar.dart';
 import 'package:spec_app/Home/index.dart';
 import '../Pages/event_page.dart';
-import '../Pages/home.dart';
-import '../Pages/settings.dart';
 
 class Handler extends StatefulWidget {
   @override
@@ -20,9 +18,8 @@ class _HandlerState extends State<Handler>with AutomaticKeepAliveClientMixin {
   int _selectedNavIndex = 0;
 
   List<Widget> _viewsByIndex=[
-    Home(),
+    HomeScreen(),
     Event_Page(),
-    Setting(),
   ];
 
 
@@ -31,7 +28,6 @@ class _HandlerState extends State<Handler>with AutomaticKeepAliveClientMixin {
     _navBarItems = [
       NavBarItemData("Home", OMIcons.home, 110, Color(0xff01b87d)),
       NavBarItemData("Events", OMIcons.image, 110, Color(0xff594ccf)),
-      NavBarItemData("Setting", OMIcons.save, 110, Color(0xfff2873f)),
     ];
   }
 

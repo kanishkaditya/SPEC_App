@@ -6,8 +6,7 @@ class StaggerAnimation extends StatelessWidget {
       : buttonZoomOutAnimation = new Tween(
           begin: 60.0,
           end: 1000.0,
-        )
-            .animate(
+        ).animate(
           new CurvedAnimation(parent: buttonController, curve: Curves.easeOut),
         ),
         buttonBottomtoCenterAnimation = new AlignmentTween(
@@ -63,10 +62,8 @@ class StaggerAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     buttonController.addListener(() {
-      // if (controller.isCompleted) Navigator.pushNamed(context, "/login");    //options
-      // if (controller.isCompleted) Navigator.of(context).pop();       //options
       if (buttonController.isCompleted) {
-        Navigator.pushReplacementNamed(context, "/login");
+        Navigator.pushReplacementNamed(context, "/LoginPage");
       }
     });
     return new AnimatedBuilder(
