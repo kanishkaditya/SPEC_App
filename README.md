@@ -38,6 +38,8 @@
   <a href="">
     <img src="/screenshots/app-preface-1.png" alt="App-Preface-Image1">
     <img src="/screenshots/app-preface-2.png" alt="App-Preface-Image2">
+    <img src="/screenshots/water-filling.gif" alt="Card-Folding-Gif" width="230">
+    <img src="/screenshots/space.png" alt="Card-Folding-Gif" width="30">
     <img src="/screenshots/card-folding.gif" alt="Card-Folding-Gif" width="230">
   </a>
 </p>
