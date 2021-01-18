@@ -16,6 +16,9 @@ class _RegisterState extends State<Register> {
   final _emailController=TextEditingController();
   final _name=TextEditingController();
   final _surname=TextEditingController();
+  String _branch;
+  bool _isCR=false;
+  String _year;
 
   bool isvalid=true;
   File _imageFile;
@@ -144,15 +147,64 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(top:15,left: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children:
+                    [Text('B',style: TextStyle(color: Colors.black38,fontWeight: FontWeight.w900,fontSize: 25),),
+                      SizedBox(width: 10,),
+                    new DropdownButton<String>(
+                      value:_branch,
+                      items: <String>['ECE', 'CSE', 'ECD', 'CSED','CE','MS','ME','Civil'].map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (value) {_branch=value;setState(() {});},
+                      hint: Text('branch'),
+                    ),]
+                    ),
+                    Row(
+                      children:
+                    [Text('Is CR'),
+                    Checkbox(value: _isCR, onChanged: (value){_isCR=value;setState(() {});})],
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.calendar_today_rounded),
+                       SizedBox(width: 10,),
+                       new DropdownButton<String>(
+                         value: _year,
+                      items: <String>['First Year','Second Year','Third Year','Fourth Year'].map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(value),
+                        );
+                      }).toList(),
+                         onChanged: (value) {
+                           _year=value;
+                           setState(() {});},
+                         hint: Text('Year'),
+                    ),]
+                    )
+                  ],
+                )
+              ),
               FloatingActionButton(
                 onPressed: ()async{
-                 if(_formKey.currentState.validate())
+                 if(_formKey.currentState.validate()&&_branch!=null&&_year!=null)
                    {
                      String name=_name.value.text;
                      String surname=_surname.value.text;
                      String email=_emailController.value.text;
                      String password=_passwordController.value.text;
-                     user=await service.SignUp(name,surname,email,password,_imageFile);
+                     branch=_branch;
+                     year=_year;
+                     user=await service.SignUp(name,surname,email,password,_imageFile,!_isCR,_year.replaceAll(new RegExp(r"\s+"), ""),_branch);
                      if(user!=null)
                        {Navigator.pushReplacementNamed(context, '/Handler',);}
                    }

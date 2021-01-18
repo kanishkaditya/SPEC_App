@@ -62,10 +62,9 @@ flutter:
       - assets/Image/google.png
       - assets/Image/bg_blue.png
       - assets/Image/default_image.png
-      - assets/Image/Oval.png
-      - assets/Image/spritesheet_sparkle.png
-      - assets/Image/Donut.png
       - assets/Image/home.jpeg
+      - assets/Image/tick.png
+      - assets/Image/multiply.png
 
 
   #   - images/a_dot_ham.jpeg

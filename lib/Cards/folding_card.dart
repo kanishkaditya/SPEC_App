@@ -67,7 +67,6 @@ class _FoldingTicketState extends State<FoldingCard> with SingleTickerProviderSt
 
     Matrix4 mtx = Matrix4.identity()
       ..setEntry(3, 2, 0.001)
-      ..setEntry(1, 2, 0.2)
       ..rotateX(pi * (ratio - 1.0));
 
     Widget card = SizedBox(height: entry.height, child: ratio < 0.5 ? entry.back : entry.front);
@@ -86,9 +85,11 @@ class _FoldingTicketState extends State<FoldingCard> with SingleTickerProviderSt
             Column(children: [
               card,
               _buildEntry(index + 1),
-            ]),
+            ]
+            ),
           ),
-        ));
+        )
+    );
   }
 
   void _updateFromWidget() {
