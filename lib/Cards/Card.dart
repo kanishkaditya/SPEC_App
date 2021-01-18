@@ -1,9 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:spec_app/Cards/EventCard.dart';
-import 'package:spec_app/Cards/event_detail.dart';
-import 'package:spec_app/Cards/event_summary.dart';
 import 'package:spec_app/Objects/Event.dart';
+import 'EventCard.dart';
+import 'event_detail.dart';
+import 'event_summary.dart';
 
 import 'folding_card.dart';
 

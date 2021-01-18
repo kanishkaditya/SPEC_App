@@ -1,10 +1,11 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:spec_app/Helper/rotation_3d.dart';
+import 'package:spec_app/Components/Animations/rotation_3d.dart';
+import 'package:spec_app/Components/CustomWidget/navbar.dart';
+import 'package:spec_app/Components/clipped_view.dart';
 
-import 'clipped_view.dart';
-import 'navbar.dart';
+
 
 // Handle the transition between selected and de-deselected, by animating it's own width,
 // and modifying the color/visibility of some child widgets

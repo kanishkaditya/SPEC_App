@@ -1,6 +1,8 @@
-import 'clipped_view.dart';
-import 'navbar_button.dart';
+
+
 import 'package:flutter/material.dart';
+import 'package:spec_app/Components/CustomWidget/navbar_button.dart';
+import 'package:spec_app/Components/clipped_view.dart';
 
 class NavBar extends StatelessWidget {
   final ValueChanged<int> itemTapped;

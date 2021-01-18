@@ -37,12 +37,11 @@ dependencies:
   shared_preferences: ^0.5.12+4
   rxdart: 0.20.0
   image_picker: ^0.6.7+17
-  table_calendar: ^2.3.3
-  intl: ^0.16.1
   animator: ^2.0.2
   flutter_animation_set: ^0.0.4
   outline_material_icons: ^0.1.0
   http:
+  table_calendar: ^2.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -63,10 +62,9 @@ flutter:
       - assets/Image/google.png
       - assets/Image/bg_blue.png
       - assets/Image/default_image.png
-      - assets/Image/Oval.png
-      - assets/Image/spritesheet_sparkle.png
-      - assets/Image/Donut.png
       - assets/Image/home.jpeg
+      - assets/Image/tick.png
+      - assets/Image/multiply.png
 
 
   #   - images/a_dot_ham.jpeg

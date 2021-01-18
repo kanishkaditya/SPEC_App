@@ -27,7 +27,7 @@ class AuthService {
       }
     });
   }
-
+  @deprecated
   Future<FirebaseUser> signInWithGoogle() async {
     loading.add(true);
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -47,7 +47,7 @@ class AuthService {
     prefs.setBool('IsLoggedInFirebase', false);
     return user;
   }
-
+  @deprecated
   void updateUserData(FirebaseUser user) async {
     DocumentReference ref = _db.collection('users').document(user.uid);
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -60,7 +60,7 @@ class AuthService {
       'lastSeen': DateTime.now()
     }, merge: true);
   }
-
+ @deprecated
   void signOutGoogle() async {
     await googleSignIn.signOut();
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -68,12 +68,11 @@ class AuthService {
     print("User Sign Out");
   }
 
-  Future<FirebaseUser> SignUp(name, surname, email, password, image) async {
-    AuthResult result = await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
+  Future<FirebaseUser> SignUp(name, surname, email, password, image,notCR,year,branch) async {
+    AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     UserUpdateInfo info = UserUpdateInfo();
     info.displayName = name + " " + surname;
-    String image_url;
+    String image_url="";
     if (image != null) {
       StorageReference ref = FirebaseStorage().ref().child(
           '${info.displayName}/profileImage');
@@ -82,7 +81,8 @@ class AuthService {
       image_url = await snapshot.ref.getDownloadURL();
     }
     info.photoUrl = image_url;
-    result.user.updateProfile(info);
+    await result.user.updateProfile(info);
+
     FirebaseUser u = result.user;
     if (u != null) {
       _db.collection('users').document(u.uid).setData(
@@ -92,12 +92,14 @@ class AuthService {
             'photoURL': image_url,
             'email': email,
             'displayName': name + " " + surname,
+            'notCR':notCR,
+            'year':year,
+            'branch':branch
           }, merge: true);
       await u.reload();
       u = await _auth.currentUser();
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool('IsLoggedInGoogle', false);
-      prefs.setBool('IsLoggedInFirebase', true);
+      prefs.setBool('IsLoggedInFirebase' , true);
       return u;
     }
   }
@@ -108,14 +110,24 @@ class AuthService {
     if (email == null && password == null) {
       FirebaseUser u = await _auth.currentUser();
       if (u != null)
-        return u;
+        {
+          await _db.collection('users').document(u.uid).get().then((value){
+            notCR=value['notCR'];
+            year=value['year'];
+            branch=value['branch'];
+          });
+        return u;}
     }
     try {
       AuthResult result = await _auth
           .signInWithEmailAndPassword(email: email, password: password);
       user = result.user;
-      prefs.setBool('IsLoggedInGoogle', false);
       prefs.setBool('IsLoggedInFirebase', true);
+      await _db.collection('users').document(user.uid).get().then((value){
+        notCR=value['notCR'];
+        year=value['year'];
+        branch=value['branch'];
+      });
       return user;
     }
     catch (error) {

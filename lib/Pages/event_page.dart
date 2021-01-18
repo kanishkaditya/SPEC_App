@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_set/widget/transition_animations.dart';
 import 'package:spec_app/Cards/Card.dart';
-import '../Objects/Event.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:spec_app/Objects/Event.dart';
 
 List<Event> events = [];
 class Event_Page extends StatefulWidget {

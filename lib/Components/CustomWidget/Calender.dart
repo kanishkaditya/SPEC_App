@@ -1,6 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:spec_app/Objects/Class.dart';
+import 'package:spec_app/Pages/Home.dart';
+import 'package:spec_app/main.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+final listenable=new ValueNotifier(true);
 class Calender extends StatelessWidget {
   final CalendarController controller;
   Calender({this.controller});
@@ -11,7 +17,7 @@ class Calender extends StatelessWidget {
       initialCalendarFormat: CalendarFormat.week,
       availableCalendarFormats:{CalendarFormat.month:'',CalendarFormat.week:''},
       formatAnimation: FormatAnimation.slide,
-      startingDayOfWeek: StartingDayOfWeek.sunday,
+      startingDayOfWeek: StartingDayOfWeek.monday,
       availableGestures: AvailableGestures.horizontalSwipe,
       calendarStyle: CalendarStyle(
         outsideDaysVisible: false,
@@ -29,6 +35,10 @@ class Calender extends StatelessWidget {
         formatButtonVisible: false,
           decoration: BoxDecoration(color: Colors.white)
       ),
+      onDaySelected: (date,events,_){
+        selectedDay=date;
+        initEvents();
+      },
       builders: CalendarBuilders(
         todayDayBuilder: (context, date, _) {
           return Stack(
@@ -41,10 +51,10 @@ class Calender extends StatelessWidget {
                 height: 10,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
+                  //borderRadius: BorderRadius.circular(15),
                   color: const Color.fromRGBO(247, 64, 106, 1.0)
                 ),
-            ),
-              ),
+            ),),
           Text(
           '${date.day}',
           style: TextStyle().copyWith(fontSize: 16.0),
@@ -53,6 +63,26 @@ class Calender extends StatelessWidget {
       );
         },
     ),
+    );
+  }
+
+  initEvents()
+  {
+
+    var document= Firestore.instance.document('Timetable/$year/$branch/${(selectedDay.weekday-1).toString()}');
+    List<dynamic>l;
+    document.get().then((value){
+      try{
+        int i=0;
+      l=value.data['schedule'];
+      comingEvents.clear();
+      l.forEach((element) {
+        comingEvents.add(Class(title: element['course'],subtitle: "${8+i}:00-${9+i++}:00",isToday: controller.isToday(selectedDay),teacher: element['teacher']));
+      });}
+      catch(e)
+      {print(e);}
+      listenable.value=!listenable.value;
+    }
     );
   }
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
-import 'package:spec_app/Helper/navbar.dart';
-import 'package:spec_app/Home/index.dart';
-import '../Pages/event_page.dart';
+import 'package:spec_app/Components/CustomWidget/navbar.dart';
+import 'package:spec_app/Pages/Home.dart';
+import 'package:spec_app/Pages/event_page.dart';
+
 
 class Handler extends StatefulWidget {
   @override

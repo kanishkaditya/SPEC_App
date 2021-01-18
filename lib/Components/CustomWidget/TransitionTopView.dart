@@ -1,13 +1,15 @@
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:spec_app/Components/Calender.dart';
+import 'package:spec_app/Components/CustomWidget/Calender.dart';
+import 'package:spec_app/main.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../main.dart';
-
+CalendarController controller;
+final drawerOpen=new ValueNotifier(true);
 class TransitionAppBar extends StatefulWidget {
   final Widget title;
-  const TransitionAppBar({this.title, Key key}) : super(key: key);
+  const TransitionAppBar({this.title});
 
   @override
   _TransitionAppBarState createState() => _TransitionAppBarState(title:this.title);
@@ -15,10 +17,10 @@ class TransitionAppBar extends StatefulWidget {
 
 class _TransitionAppBarState extends State<TransitionAppBar> {
   final Widget title;
-  CalendarController controller;
 
   @override
   void initState() {
+    if(controller==null)
     controller=CalendarController();
   }
 
@@ -30,7 +32,6 @@ class _TransitionAppBarState extends State<TransitionAppBar> {
       pinned: true,
       delegate: _TransitionAppBarDelegate(
         title: this.title,
-        controller: this.controller
       ),
     );
   }
@@ -40,18 +41,17 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
   final _avatarTween =
   SizeTween(begin: Size(150.0, 150.0), end: Size(50.0, 50.0));
   final _avatarMarginTween =
-  EdgeInsetsTween(begin: EdgeInsets.zero, end: EdgeInsets.only(left: 10.0));
+  EdgeInsetsTween(begin: EdgeInsets.zero, end: EdgeInsets.only(left: 10.0+30));
   final _avatarAlignTween =
   AlignmentTween(begin: Alignment.topCenter, end: Alignment.centerLeft);
-
+  final _menuTween=EdgeInsetsTween(begin:EdgeInsets.only(left:15,top:25),end:EdgeInsets.only(left:10,top:45));
   final _titleMarginTween = EdgeInsetsTween(
       begin: EdgeInsets.only(top: 150.0 + 5.0),
-      end: EdgeInsets.only(left: 10.0 + 50.0 + 5.0));
+      end: EdgeInsets.only(left: 10.0 + 50.0 + 5.0+30));
   final _titleAlignTween =
   AlignmentTween(begin: Alignment.center, end: Alignment.centerLeft);
-  CalendarController controller;
   final Widget title;
-  _TransitionAppBarDelegate({ this.title,this.controller})
+  _TransitionAppBarDelegate({ this.title})
       :assert(title != null&&controller!=null);
 
   @override
@@ -62,7 +62,7 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
     final avatarSize = _avatarTween.lerp(progress);
     final avatarMargin = _avatarMarginTween.lerp(progress);
     final avatarAlign = _avatarAlignTween.lerp(progress);
-
+    final menuAlign=_menuTween.lerp(progress);
     final titleMargin = _titleMarginTween.lerp(progress);
     final titleAlign = _titleAlignTween.lerp(progress);
     return Flex(
@@ -70,15 +70,26 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
       children: [
         Flexible(
           child: Stack(
-            fit: StackFit.expand,
+           // fit: StackFit.expand,
             children: <Widget>[
-              Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(color: Colors.white,
-                  //fit:BoxFit.cover,
-                  //colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.dstATop),
-                 // )
-                  )
+              ClipRect(
+                child: Container(
+                  child:BackdropFilter(
+                    filter: ImageFilter.blur(sigmaY: 5,sigmaX: 5),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: menuAlign,
+                        child: InkWell(
+                                child:Icon(Icons.menu),
+                          onTap:(){
+                                  drawerOpen.value=!drawerOpen.value;
+                          },
+                        ),
+                      ),
+                    ),
+                  ) ,
+                ),
               ),
               Padding(
                 padding: avatarMargin,
@@ -91,7 +102,7 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
                       decoration:  BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                              fit: BoxFit.fill,
+                              fit: BoxFit.cover,
                               image: NetworkImage(user.photoUrl)
                           )
                       )
@@ -109,7 +120,7 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
             ],
           ),
         ),
-         new Calender(controller:controller),
+        new Calender(controller:controller),
       ],
     );
   }

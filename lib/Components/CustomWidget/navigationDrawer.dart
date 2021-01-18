@@ -1,5 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:spec_app/Pages/attendenceCalender.dart';
+import 'package:spec_app/main.dart';
 
 class NavigationDrawer extends StatefulWidget {
   @override
@@ -9,7 +11,12 @@ class NavigationDrawer extends StatefulWidget {
 class _NavigationDrawerState extends State<NavigationDrawer> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return BackdropFilter(
+      filter: ImageFilter.blur(
+        sigmaX: 10.0,
+        sigmaY: 10.0,
+      ),
+      child: Column(
         children: [
           Container(
             child: Padding(
@@ -18,27 +25,31 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "Nabin Nath",
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w800,
+                  CircleAvatar(
+                    radius: 50.0,
+                    backgroundImage: NetworkImage(
+                      user.photoUrl,
                     ),
                   ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   Text(
-                    "194085",
+                    user.displayName,
                     style: TextStyle(
                       fontSize: 22.0,
-                      fontWeight: FontWeight.w800,
+                      color:Colors.black,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   SizedBox(
                     height: 5.0,
                   ),
                   Text(
-                    "nabinnath9@gmail.com",
+                    user.email,
                     style: TextStyle(
                       fontSize: 16.0,
+                      color:Colors.black,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -55,43 +66,30 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             onTap: () {},
             leading: Icon(
               Icons.book,
-              color: Colors.black,
+              color: Colors.white,
             ),
-            title: Text("Study Material"),
-          ),
-
-          ListTile(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyHomePage()),
-              );
-            },
-            leading: Icon(
-              Icons.calendar_today_outlined,
-              color: Colors.black,
-            ),
-            title: Text("Attendence Manager"),
+            title: Text("Study Material",style:TextStyle(color:Colors.white),),
           ),
 
           ListTile(
             onTap: () {},
             leading: Icon(
               Icons.help,
-              color: Colors.black,
+              color: Colors.white,
             ),
-            title: Text("About SPEC"),
+            title: Text("About SPEC",style:TextStyle(color:Colors.white),),
           ),
 
           ListTile(
             onTap: () {},
             leading: Icon(
               Icons.settings,
-              color: Colors.black,
+              color: Colors.white,
             ),
-            title: Text("Settings"),
+            title: Text("Settings",style: TextStyle(color:Colors.white),),
           )
         ],
+      ),
     );
   }
 }
