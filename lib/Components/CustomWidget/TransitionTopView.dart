@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:spec_app/Components/Calender.dart';
+import 'package:spec_app/Components/CustomWidget/Calender.dart';
 import 'package:spec_app/main.dart';
 import 'package:table_calendar/table_calendar.dart';
 

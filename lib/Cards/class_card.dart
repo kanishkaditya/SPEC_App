@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/kanishkaditya/AndroidStudioProjects/spec_app/lib/Components/ParallaxImageGen.dart';
-import 'file:///C:/Users/kanishkaditya/AndroidStudioProjects/spec_app/lib/Components/liquid_painter.dart';
+import 'package:spec_app/Components/Animations/liquid_painter.dart';
+import 'package:spec_app/Components/ParallaxImageGen.dart';
+
 import 'package:spec_app/Components/rounded_shadow.dart';
 import 'package:spec_app/Components/syles.dart';
 import 'package:spec_app/Objects/Class.dart';

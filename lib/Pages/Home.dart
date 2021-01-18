@@ -8,19 +8,22 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/animation.dart';
 import 'package:spec_app/Cards/class_card.dart';
-import 'package:spec_app/Components/AddButton.dart';
-import 'package:spec_app/Components/Calender.dart';
+import 'package:spec_app/Components/CustomWidget/AddButton.dart';
+import 'package:spec_app/Components/CustomWidget/Calender.dart';
+import 'package:spec_app/Components/CustomWidget/TimeTableList.dart';
+import 'package:spec_app/Components/CustomWidget/TransitionTopView.dart';
+import 'package:spec_app/Components/CustomWidget/navigationDrawer.dart';
+
 import 'package:spec_app/Components/FadeContainer.dart';
-import 'package:spec_app/Components/TransitionTopView.dart';
+
 import 'package:spec_app/Objects/Class.dart';
 import 'package:spec_app/main.dart';
 
 import 'package:flutter/scheduler.dart' show timeDilation;
-import 'package:spec_app/Components/TimeTableList.dart';
-import 'package:spec_app/navigationDrawer.dart';
 
 
-import 'homeAnimation.dart';
+
+import '../Components/Animations/homeAnimation.dart';
 
 List<Class>comingEvents=[];
 DateTime selectedDay=DateTime.now();
