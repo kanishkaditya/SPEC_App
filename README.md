@@ -37,6 +37,7 @@
 <p align="center">
   <a href="">
     <img src="/screenshots/app-preface-1.png" alt="App-Preface-Image1">
+    <img src="/screenshots/app-preface-2.png" alt="App-Preface-Image2">
   </a>
 </p>
 
