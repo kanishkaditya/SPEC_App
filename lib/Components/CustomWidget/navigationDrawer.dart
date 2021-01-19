@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:spec_app/Components/demo.dart';
 import 'package:spec_app/main.dart';
 
 class NavigationDrawer extends StatefulWidget {
@@ -84,6 +85,14 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             onTap: () {},
             leading: Icon(
               Icons.settings,
+              color: Colors.white,
+            ),
+            title: Text("Results",style: TextStyle(color:Colors.white),),
+          ),
+          ListTile(
+            onTap: () {Navigator.pushNamed(context, '/Result');},
+            leading: Icon(
+              Icons.mark_chat_read_outlined,
               color: Colors.white,
             ),
             title: Text("Settings",style: TextStyle(color:Colors.white),),

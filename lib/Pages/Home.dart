@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/animation.dart';
 import 'package:spec_app/Cards/class_card.dart';
+import 'package:spec_app/Components/Animations/homeAnimation.dart';
 import 'package:spec_app/Components/CustomWidget/AddButton.dart';
 import 'package:spec_app/Components/CustomWidget/Calender.dart';
 import 'package:spec_app/Components/CustomWidget/TimeTableList.dart';
@@ -21,9 +22,6 @@ import 'package:spec_app/main.dart';
 
 import 'package:flutter/scheduler.dart' show timeDilation;
 
-
-
-import '../Components/Animations/homeAnimation.dart';
 
 List<Class>comingEvents=[];
 DateTime selectedDay=DateTime.now();

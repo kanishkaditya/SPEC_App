@@ -68,14 +68,14 @@ class Calender extends StatelessWidget {
 
   initEvents()
   {
-
+    comingEvents.clear();
     var document= Firestore.instance.document('Timetable/$year/$branch/${(selectedDay.weekday-1).toString()}');
     List<dynamic>l;
     document.get().then((value){
       try{
         int i=0;
       l=value.data['schedule'];
-      comingEvents.clear();
+
       l.forEach((element) {
         comingEvents.add(Class(title: element['course'],subtitle: "${8+i}:00-${9+i++}:00",isToday: controller.isToday(selectedDay),teacher: element['teacher']));
       });}

@@ -68,7 +68,7 @@ class AuthService {
     print("User Sign Out");
   }
 
-  Future<FirebaseUser> SignUp(name, surname, email, password, image,notCR,year,branch) async {
+  Future<FirebaseUser> SignUp(name, surname, email, password, image,notCR,year,branch,rollno) async {
     AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     UserUpdateInfo info = UserUpdateInfo();
     info.displayName = name + " " + surname;
@@ -94,7 +94,8 @@ class AuthService {
             'displayName': name + " " + surname,
             'notCR':notCR,
             'year':year,
-            'branch':branch
+            'branch':branch,
+            'roll':rollno
           }, merge: true);
       await u.reload();
       u = await _auth.currentUser();
@@ -115,6 +116,7 @@ class AuthService {
             notCR=value['notCR'];
             year=value['year'];
             branch=value['branch'];
+            rollno=value['roll'];
           });
         return u;}
     }
@@ -127,6 +129,7 @@ class AuthService {
         notCR=value['notCR'];
         year=value['year'];
         branch=value['branch'];
+        rollno=value['roll'];
       });
       return user;
     }

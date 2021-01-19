@@ -42,6 +42,7 @@ dependencies:
   outline_material_icons: ^0.1.0
   http:
   table_calendar: ^2.1.0
+  slimy_card: ^1.0.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -65,6 +66,7 @@ flutter:
       - assets/Image/home.jpeg
       - assets/Image/tick.png
       - assets/Image/multiply.png
+      - assets/Image/glow.png
 
 
   #   - images/a_dot_ham.jpeg

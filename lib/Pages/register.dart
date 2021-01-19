@@ -16,6 +16,7 @@ class _RegisterState extends State<Register> {
   final _emailController=TextEditingController();
   final _name=TextEditingController();
   final _surname=TextEditingController();
+  String roll='194087';
   String _branch;
   bool _isCR=false;
   String _year;
@@ -196,15 +197,16 @@ class _RegisterState extends State<Register> {
               ),
               FloatingActionButton(
                 onPressed: ()async{
-                 if(_formKey.currentState.validate()&&_branch!=null&&_year!=null)
+                 if(_formKey.currentState.validate()&&_branch!=null&&_year!=null&&roll!=null)
                    {
                      String name=_name.value.text;
                      String surname=_surname.value.text;
                      String email=_emailController.value.text;
                      String password=_passwordController.value.text;
                      branch=_branch;
-                     year=_year;
-                     user=await service.SignUp(name,surname,email,password,_imageFile,!_isCR,_year.replaceAll(new RegExp(r"\s+"), ""),_branch);
+                     year=_year.replaceAll(new RegExp(r"\s+"), "");
+                     rollno=roll;
+                     user=await service.SignUp(name,surname,email,password,_imageFile,!_isCR,_year.replaceAll(new RegExp(r"\s+"), ""),_branch,roll);
                      if(user!=null)
                        {Navigator.pushReplacementNamed(context, '/Handler',);}
                    }
