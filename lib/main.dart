@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spec_app/Helper/AuthService.dart';
 import 'package:spec_app/Helper/Handler.dart';
+import 'package:spec_app/Pages/courses.dart';
 import 'package:spec_app/Pages/loginPage.dart';
 import 'package:spec_app/Pages/register.dart';
 
@@ -36,6 +37,7 @@ void main() async {
       '/LoginPage': (context) => LoginPage(title: 'Login Page'),
       '/Handler': (context) => Handler(),
       '/Register': (context) => Register(),
+      '/Courses': (context) => courses(),
     },
     initialRoute: isLoggedIn ? '/Handler' : '/LoginPage',
   ));

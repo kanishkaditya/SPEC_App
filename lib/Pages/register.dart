@@ -16,6 +16,7 @@ class _RegisterState extends State<Register> {
   final _emailController=TextEditingController();
   final _name=TextEditingController();
   final _surname=TextEditingController();
+
   String _branch;
   bool _isCR=false;
   String _year;

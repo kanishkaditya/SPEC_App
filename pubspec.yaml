@@ -65,6 +65,7 @@ flutter:
       - assets/Image/home.jpeg
       - assets/Image/tick.png
       - assets/Image/multiply.png
+      - assets/image/studyBackground.png
 
 
   #   - images/a_dot_ham.jpeg

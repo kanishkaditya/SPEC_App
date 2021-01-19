@@ -63,7 +63,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           //Now let's Add the button for the Menu
           //and let's copy that and modify it
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed("/Courses");
+            },
             leading: Icon(
               Icons.book,
               color: Colors.white,
