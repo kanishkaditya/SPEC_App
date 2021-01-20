@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:spec_app/Components/result_list_renderer.dart';
-import 'package:spec_app/Components/result_title_card.dart';
+import 'package:spec_app/Components/ResultTab/result_list_renderer.dart';
+import 'package:spec_app/Components/ResultTab/result_title_card.dart';
 import 'package:spec_app/Objects/Result.dart';
 
 class ResultDetailView extends StatefulWidget {

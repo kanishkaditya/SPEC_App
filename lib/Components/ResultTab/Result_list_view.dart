@@ -1,6 +1,7 @@
 import 'dart:convert';
+
 import 'package:http/http.dart';
-import 'package:spec_app/Components/result_list_renderer.dart';
+import 'package:spec_app/Components/ResultTab/result_list_renderer.dart';
 import 'package:spec_app/Objects/Student.dart';
 import 'package:spec_app/main.dart';
 import 'package:http/http.dart' as http;
@@ -66,7 +67,7 @@ class _ResultListViewState extends State<ResultListView> {
           physics: BouncingScrollPhysics(),
           itemCount: s.summary.length,
           //Add some extra padding to the top & bottom of the list
-          padding: EdgeInsets.only(top: 300, bottom: 200),
+          padding: EdgeInsets.only(top: 300),
           itemBuilder: (context, index) {
             return ResultListRenderer(
               //Re-dispatch our tap event to anyone who is listening

@@ -1,10 +1,10 @@
+import 'package:spec_app/Components/Animations/star_field.dart';
 import 'package:spec_app/Components/CustomWidget/fade_route_builder.dart';
 import 'package:spec_app/Components/CustomWidget/nested_navigator.dart';
 
 import 'package:flutter/material.dart';
-import 'package:spec_app/Components/Result_list_view.dart';
-import 'package:spec_app/Components/result_detail_view.dart';
-import 'package:spec_app/Components/star_field/star_field.dart';
+import 'package:spec_app/Components/ResultTab/Result_list_view.dart';
+import 'package:spec_app/Components/ResultTab/result_detail_view.dart';
 
 
 class ResultList extends StatefulWidget {

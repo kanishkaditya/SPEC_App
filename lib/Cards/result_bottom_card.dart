@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spec_app/Components/result_list_renderer.dart';
+import 'package:spec_app/Components/ResultTab/result_list_renderer.dart';
 
 class ResultBottomCard extends StatefulWidget
 {
