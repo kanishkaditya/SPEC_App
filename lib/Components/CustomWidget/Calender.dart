@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:spec_app/Objects/Class.dart';
+import 'package:spec_app/Objects/ManualEvent.dart';
 import 'package:spec_app/Pages/Home.dart';
 import 'package:spec_app/main.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+
 
 final listenable=new ValueNotifier(true);
 class Calender extends StatelessWidget {
@@ -68,6 +72,7 @@ class Calender extends StatelessWidget {
 
   initEvents()
   {
+
     comingEvents.clear();
     var document= Firestore.instance.document('Timetable/$year/$branch/${(selectedDay.weekday-1).toString()}');
     List<dynamic>l;

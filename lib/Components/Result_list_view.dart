@@ -66,7 +66,7 @@ class _ResultListViewState extends State<ResultListView> {
           physics: BouncingScrollPhysics(),
           itemCount: s.summary.length,
           //Add some extra padding to the top & bottom of the list
-          padding: EdgeInsets.only(top: 300, bottom: 200),
+          padding: EdgeInsets.only(top: 300),
           itemBuilder: (context, index) {
             return ResultListRenderer(
               //Re-dispatch our tap event to anyone who is listening

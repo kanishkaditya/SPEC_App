@@ -46,14 +46,14 @@ class _TimeTableListState extends State<TimeTableList> {
   Widget _buildListItem(int index) {
     return Container(
       margin:comingEvents[index].title=='break'||comingEvents[index].title=='lunch'?EdgeInsets.symmetric(vertical: _listPadding / 4, horizontal: 0):EdgeInsets.symmetric(vertical: _listPadding / 2, horizontal: 0),
-      child: ClassCard(
+      child: comingEvents[index] is Class ? ClassCard(
         currentAttendance: _currentAttendance,
         classData: comingEvents[index],
         isOpen: comingEvents[index] == _selectedClass,
         onTap: comingEvents[index].title!="break"&&comingEvents[index].title!="lunch"?_handleCardTapped:null,
         scrollController: _scrollController,
         imgIndex:(index+widget.a)%s.length,
-      ),
+      ) : Container(),
     );
   }
 

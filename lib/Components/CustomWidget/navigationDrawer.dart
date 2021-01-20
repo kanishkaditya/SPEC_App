@@ -63,7 +63,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           //Now let's Add the button for the Menu
           //and let's copy that and modify it
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed("/Courses");
+            },
             leading: Icon(
               Icons.book,
               color: Colors.white,
@@ -81,17 +83,17 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           ),
 
           ListTile(
-            onTap: () {},
+            onTap: () {Navigator.pushNamed(context, '/Result');},
             leading: Icon(
-              Icons.settings,
+              Icons.menu_book_rounded,
               color: Colors.white,
             ),
             title: Text("Results",style: TextStyle(color:Colors.white),),
           ),
           ListTile(
-            onTap: () {Navigator.pushNamed(context, '/Result');},
+            onTap: () {},
             leading: Icon(
-              Icons.mark_chat_read_outlined,
+              Icons.settings,
               color: Colors.white,
             ),
             title: Text("Settings",style: TextStyle(color:Colors.white),),
