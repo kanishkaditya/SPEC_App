@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:spec_app/Cards/class_card.dart';
@@ -29,30 +30,30 @@ class _TimeTableListState extends State<TimeTableList> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-        children: <Widget>[
-          ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: comingEvents.length,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) => _buildListItem(index),
-          ),
-        ],
-      );
-  }
+           return Stack(
+             children: [
+               ListView.builder(
+                 shrinkWrap: true,
+                 physics: NeverScrollableScrollPhysics(),
+                 itemCount:comingEvents.length,
+                 scrollDirection: Axis.vertical,
+                 itemBuilder: (context, index) => _buildListItem(index),
+               ),
+             ],
+           );
+        }
 
   Widget _buildListItem(int index) {
     return Container(
-      margin: comingEvents[index].title=='break'||comingEvents[index].title=='lunch'?EdgeInsets.symmetric(vertical: _listPadding / 4, horizontal: 0):EdgeInsets.symmetric(vertical: _listPadding / 2, horizontal: 0),
-      child: ClassCard(
+      margin:comingEvents[index].title=='break'||comingEvents[index].title=='lunch'?EdgeInsets.symmetric(vertical: _listPadding / 4, horizontal: 0):EdgeInsets.symmetric(vertical: _listPadding / 2, horizontal: 0),
+      child: comingEvents[index] is Class ? ClassCard(
         currentAttendance: _currentAttendance,
         classData: comingEvents[index],
         isOpen: comingEvents[index] == _selectedClass,
         onTap: comingEvents[index].title!="break"&&comingEvents[index].title!="lunch"?_handleCardTapped:null,
         scrollController: _scrollController,
         imgIndex:(index+widget.a)%s.length,
-      ),
+      ) : Container(),
     );
   }
 
@@ -65,7 +66,7 @@ class _TimeTableListState extends State<TimeTableList> {
       //Open tapped drink card and scroll to it
       else {
         _selectedClass = data;
-        var selectedIndex = comingEvents.indexOf(_selectedClass);
+        var selectedIndex =comingEvents.indexOf(_selectedClass);
         var closedHeight = ClassCard.nominalHeightClosed;
         //Calculate scrollTo offset, subtract a bit so we don't end up perfectly at the top
         var offset = selectedIndex * (closedHeight + _listPadding) - closedHeight * .35;

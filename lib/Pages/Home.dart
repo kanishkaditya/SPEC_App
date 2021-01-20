@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/animation.dart';
 import 'package:spec_app/Cards/class_card.dart';
+import 'package:spec_app/Components/Animations/homeAnimation.dart';
 import 'package:spec_app/Components/CustomWidget/AddButton.dart';
 import 'package:spec_app/Components/CustomWidget/Calender.dart';
 import 'package:spec_app/Components/CustomWidget/TimeTableList.dart';
@@ -23,9 +24,7 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 
 
 
-import '../Components/Animations/homeAnimation.dart';
-
-List<Class>comingEvents=[];
+List comingEvents=[];
 DateTime selectedDay=DateTime.now();
 
 class HomeScreen extends StatefulWidget {
@@ -175,6 +174,7 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
               fadeScreenAnimation: fadeScreenAnimation,
               containerGrowAnimation: containerGrowAnimation,
             ),
+            if(notCR ==false)
             animateStatus == 0
                 ? new Align(
               alignment: Alignment.bottomRight,
@@ -185,6 +185,7 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
                       setState(() {});
                       animateStatus = 1;
                       _playAnimation();
+
                     },
                     child: new AddButton(
                       buttonGrowAnimation: buttonGrowAnimation,

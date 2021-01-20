@@ -17,7 +17,7 @@ class _coursesState extends State<courses> {
               height: size.height * .45,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/image/studyBackground.png"),
+                  image: AssetImage("assets/Image/studyBackground.png"),
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -33,7 +33,7 @@ class _coursesState extends State<courses> {
                         height: size.height * 0.05,
                       ),
                       Text(
-                        "Meditation",
+                        "Study Material :)",
                         style: Theme.of(context)
                             .textTheme
                             .display1

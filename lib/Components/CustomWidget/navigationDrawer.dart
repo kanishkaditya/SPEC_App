@@ -83,6 +83,14 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           ),
 
           ListTile(
+            onTap: () {Navigator.pushNamed(context, '/Result');},
+            leading: Icon(
+              Icons.menu_book_rounded,
+              color: Colors.white,
+            ),
+            title: Text("Results",style: TextStyle(color:Colors.white),),
+          ),
+          ListTile(
             onTap: () {},
             leading: Icon(
               Icons.settings,

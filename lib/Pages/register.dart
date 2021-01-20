@@ -16,7 +16,9 @@ class _RegisterState extends State<Register> {
   final _emailController=TextEditingController();
   final _name=TextEditingController();
   final _surname=TextEditingController();
+  final _rollno = TextEditingController();
 
+  String roll;
   String _branch;
   bool _isCR=false;
   String _year;
@@ -70,6 +72,7 @@ class _RegisterState extends State<Register> {
               Padding(
                 padding: EdgeInsets.all(8),
                 child: TextFormField(
+                  autofocus: false,
                   validator: (String value){
                     if(value.isEmpty){
                       return "Name cant be null";
@@ -87,6 +90,7 @@ class _RegisterState extends State<Register> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  autofocus: false,
                   controller:_surname,
                   decoration: InputDecoration(
                       labelText: "Surname",
@@ -95,8 +99,32 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               Padding(
+                padding: EdgeInsets.all(8),
+                child: TextFormField(
+                  autofocus: false,
+                  validator: (String value){
+                    if(value.isEmpty){
+                      return "Roll no cant be null";
+                    }
+                    else if(value.length!=6){
+                      return "Roll no is of 6 digits";
+                    }
+
+                    return !RegExp(r"\d\d\d\d\d\d")
+                        .hasMatch(value)?"*Please enter a valid roll no":null;
+                  },
+                  controller:_rollno,
+                  decoration: InputDecoration(
+                    labelText: "Roll number",
+                    icon: Icon(Icons.account_balance , size: 30,),
+                    hintText: "Enter your Roll number",
+                  ),
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  autofocus: false,
                   validator: (String value){
                       if(!isvalid)
                       {return " ";}
@@ -114,6 +142,7 @@ class _RegisterState extends State<Register> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  autofocus: false,
                   obscureText: true,
                   controller: _passwordController,
                   validator: (String value){
@@ -134,6 +163,7 @@ class _RegisterState extends State<Register> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  autofocus: false,
                   obscureText: true,
                   controller: _confirmPasswordController,
                   validator: (String value){
@@ -203,9 +233,11 @@ class _RegisterState extends State<Register> {
                      String surname=_surname.value.text;
                      String email=_emailController.value.text;
                      String password=_passwordController.value.text;
+                     roll = _rollno.value.text;
                      branch=_branch;
-                     year=_year;
-                     user=await service.SignUp(name,surname,email,password,_imageFile,!_isCR,_year.replaceAll(new RegExp(r"\s+"), ""),_branch);
+                     year=_year.replaceAll(new RegExp(r"\s+"), "");
+                     rollno=roll;
+                     user=await service.SignUp(name,surname,email,password,_imageFile,!_isCR,_year.replaceAll(new RegExp(r"\s+"), ""),_branch,roll);
                      if(user!=null)
                        {Navigator.pushReplacementNamed(context, '/Handler',);}
                    }

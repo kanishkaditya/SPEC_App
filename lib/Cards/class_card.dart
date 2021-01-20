@@ -223,15 +223,17 @@ class _ClassCardState extends State<ClassCard> with TickerProviderStateMixin {
 
   Column _buildBottomContent(double attendanceValue) {
     List<Widget> rowChildren = [];
-    if (attendanceValue == 0) {
-      rowChildren.add(Text("Congratulations!", style: Styles.text(16, Colors.white, true)));
-    } else {
-      rowChildren.addAll([
-        Text("You're only ", style: Styles.text(12, Colors.white, false)),
-        Text(" ${attendanceValue.round()} ", style: Styles.text(16, AppColors.orangeAccent, true)),
-        Text(" attendance away", style: Styles.text(12, Colors.white, false)),
-      ]);
-    }
+    // under progress
+    // if (attendanceValue == 0) {
+    //   rowChildren.add(Text("Congratulations!", style: Styles.text(16, Colors.white, true)));
+    // }
+    // else {
+    //   rowChildren.addAll([
+    //     Text("You're only ", style: Styles.text(12, Colors.white, false)),
+    //     Text(" ${attendanceValue.round()} ", style: Styles.text(16, AppColors.orangeAccent, true)),
+    //     Text(" attendance away", style: Styles.text(12, Colors.white, false)),
+    //   ]);
+    // }
     return Column(
       children: [
         //Body Text
