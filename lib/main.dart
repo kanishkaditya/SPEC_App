@@ -6,7 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spec_app/Components/ResultTab/ResultList.dart';
 import 'package:spec_app/Helper/AuthService.dart';
 import 'package:spec_app/Helper/Handler.dart';
+import 'package:spec_app/Objects/ManualEvent.dart';
+import 'package:spec_app/Pages/courses.dart';
 import 'package:spec_app/Pages/loginPage.dart';
+import 'package:spec_app/Pages/manual_events.dart';
 import 'package:spec_app/Pages/register.dart';
 
 AuthService service;
@@ -14,7 +17,8 @@ FirebaseUser user;
 bool notCR;
 String year;
 String branch;
-String rollno="194087";
+String rollno;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -38,7 +42,9 @@ void main() async {
       '/LoginPage': (context) => LoginPage(title: 'Login Page'),
       '/Handler': (context) => Handler(),
       '/Register': (context) => Register(),
-      '/Result':(context)=>ResultList()
+      '/Courses': (context) => courses(),
+      '/Result':(context)=>ResultList(),
+      '/addEvents' : (context) => addEvents(),
     },
     initialRoute: isLoggedIn ? '/Handler' : '/LoginPage',
   ));

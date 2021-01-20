@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:spec_app/Cards/class_card.dart';
+import 'package:spec_app/Components/Animations/fade_in_ui.dart';
+import 'package:spec_app/Components/Animations/star_field.dart';
 import 'package:spec_app/Objects/Class.dart';
 import 'package:spec_app/Pages/Home.dart';
 
@@ -18,6 +20,8 @@ class TimeTableList extends StatefulWidget {
 class _TimeTableListState extends State<TimeTableList> {
   double _listPadding = 20;
   Class _selectedClass;
+
+
   int _currentAttendance;
   ScrollController _scrollController;
   _TimeTableListState(this._scrollController);
@@ -37,7 +41,7 @@ class _TimeTableListState extends State<TimeTableList> {
                  physics: NeverScrollableScrollPhysics(),
                  itemCount:comingEvents.length,
                  scrollDirection: Axis.vertical,
-                 itemBuilder: (context, index) => _buildListItem(index),
+                 itemBuilder: (context, index) => FadeIn(index+0.5,_buildListItem(index)),
                ),
              ],
            );
@@ -46,14 +50,14 @@ class _TimeTableListState extends State<TimeTableList> {
   Widget _buildListItem(int index) {
     return Container(
       margin:comingEvents[index].title=='break'||comingEvents[index].title=='lunch'?EdgeInsets.symmetric(vertical: _listPadding / 4, horizontal: 0):EdgeInsets.symmetric(vertical: _listPadding / 2, horizontal: 0),
-      child: ClassCard(
+      child: comingEvents[index] is Class ? ClassCard(
         currentAttendance: _currentAttendance,
         classData: comingEvents[index],
         isOpen: comingEvents[index] == _selectedClass,
         onTap: comingEvents[index].title!="break"&&comingEvents[index].title!="lunch"?_handleCardTapped:null,
         scrollController: _scrollController,
         imgIndex:(index+widget.a)%s.length,
-      ),
+      ) : Container(),
     );
   }
 

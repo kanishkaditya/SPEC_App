@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/animation.dart';
 import 'package:spec_app/Cards/class_card.dart';
+import 'package:spec_app/Components/Animations/homeAnimation.dart';
+import 'package:spec_app/Components/Animations/star_field.dart';
 import 'package:spec_app/Components/CustomWidget/AddButton.dart';
 import 'package:spec_app/Components/CustomWidget/Calender.dart';
 import 'package:spec_app/Components/CustomWidget/TimeTableList.dart';
@@ -17,16 +19,13 @@ import 'package:spec_app/Components/CustomWidget/TransitionTopView.dart';
 import 'package:spec_app/Components/FadeContainer.dart';
 import 'package:spec_app/Components/Navdrawer/navigationDrawer.dart';
 
-import 'package:spec_app/Objects/Class.dart';
 import 'package:spec_app/main.dart';
 
 import 'package:flutter/scheduler.dart' show timeDilation;
 
 
 
-import '../Components/Animations/homeAnimation.dart';
-
-List<Class>comingEvents=[];
+List comingEvents=[];
 DateTime selectedDay=DateTime.now();
 
 class HomeScreen extends StatefulWidget {
@@ -55,7 +54,7 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
     drawerKey=GlobalKey();
     a=Random().nextInt(s.length);
     listenable.addListener(() {
-    //  screenController.reset();
+      //screenController.reset();
       setState(() {});
     }
     );
@@ -150,6 +149,7 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
         drawer: NavigationDrawer(),
         body: Stack(
           children: [
+            StarField(starCount: 400,starSpeed: 0.5,),
             new FadeBox(
               fadeScreenAnimation: fadeScreenAnimation,
               containerGrowAnimation: containerGrowAnimation,
@@ -176,6 +176,7 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
               fadeScreenAnimation: fadeScreenAnimation,
               containerGrowAnimation: containerGrowAnimation,
             ),
+            if(notCR ==false)
             animateStatus == 0
                 ? new Align(
               alignment: Alignment.bottomRight,
@@ -186,6 +187,7 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
                       setState(() {});
                       animateStatus = 1;
                       _playAnimation();
+
                     },
                     child: new AddButton(
                       buttonGrowAnimation: buttonGrowAnimation,
