@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:spec_app/main.dart';
 
 class NavigationDrawer extends StatefulWidget {
@@ -45,11 +46,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   SizedBox(
                     height: 5.0,
                   ),
-                  Text(
+                  NeumorphicText(
                     user.email,
-                    style: TextStyle(
+                    style: NeumorphicStyle(lightSource: LightSource.topLeft,depth: 20,shadowLightColor: Colors.black38,shadowDarkColor: Colors.black),
+                    textStyle: NeumorphicTextStyle(
                       fontSize: 16.0,
-                      color:Colors.black,
+                      //color:Colors.black,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -72,7 +74,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             ),
             title: Text("Study Material",style:TextStyle(color:Colors.white),),
           ),
-
+          SizedBox(
+            height: 20.0,
+          ),
           ListTile(
             onTap: () {},
             leading: Icon(
@@ -82,6 +86,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             title: Text("About SPEC",style:TextStyle(color:Colors.white),),
           ),
 
+          SizedBox(
+            height: 20.0,
+          ),
           ListTile(
             onTap: () {Navigator.pushNamed(context, '/Result');},
             leading: Icon(
@@ -89,6 +96,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               color: Colors.white,
             ),
             title: Text("Results",style: TextStyle(color:Colors.white),),
+          ),
+          SizedBox(
+            height: 20.0,
           ),
           ListTile(
             onTap: () {},

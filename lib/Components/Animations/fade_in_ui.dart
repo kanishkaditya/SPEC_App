@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sa_v1_migration/sa_v1_migration.dart';
 
-class FadeIn extends StatelessWidget {
+class FadeIn extends StatefulWidget {
   final double delay;
   final Widget child;
-
   FadeIn(this.delay, this.child);
 
+  @override
+  _FadeInState createState() => _FadeInState();
+}
+
+class _FadeInState extends State<FadeIn> {
   @override
   Widget build(BuildContext context) {
     final tween = MultiTrackTween([
@@ -18,10 +22,10 @@ class FadeIn extends StatelessWidget {
     ]);
 
     return ControlledAnimation(
-      delay: Duration(milliseconds: (300 * delay).round()),
+      delay: Duration(milliseconds: (300 * widget.delay).round()),
       duration: tween.duration,
       tween: tween,
-      child: child,
+      child: widget.child,
       builderWithChild: (context, child, animation) => Opacity(
             opacity: animation["opacity"],
             child: Transform.translate(
@@ -30,7 +34,6 @@ class FadeIn extends StatelessWidget {
     );
   }
 }
-
 class WhitespaceSeparator extends StatelessWidget {
   const WhitespaceSeparator({
     Key key,

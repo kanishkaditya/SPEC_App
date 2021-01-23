@@ -1,26 +1,21 @@
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/animation.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:spec_app/Cards/class_card.dart';
 import 'package:spec_app/Components/Animations/homeAnimation.dart';
 import 'package:spec_app/Components/Animations/star_field.dart';
-import 'package:spec_app/Components/CustomWidget/AddButton.dart';
 import 'package:spec_app/Components/CustomWidget/Calender.dart';
 import 'package:spec_app/Components/CustomWidget/TimeTableList.dart';
 import 'package:spec_app/Components/CustomWidget/TransitionTopView.dart';
-
-
 import 'package:spec_app/Components/FadeContainer.dart';
 import 'package:spec_app/Components/Navdrawer/navigationDrawer.dart';
-
 import 'package:spec_app/main.dart';
-
 import 'package:flutter/scheduler.dart' show timeDilation;
 
 
@@ -42,6 +37,8 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
   Animation<double> buttonGrowAnimation;
   AnimationController screenController;
   ScrollController scrollController;
+  ScrollController nestedscrollController;
+  Animation buttondisappearanim;
   Animation<Alignment> buttonSwingAnimation;
   Animation<Color> fadeScreenAnimation;
   GlobalKey<ScaffoldState> drawerKey;
@@ -51,6 +48,7 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
   @override
   void initState() {
     super.initState();
+    //initManualEvents();
     drawerKey=GlobalKey();
     a=Random().nextInt(s.length);
     listenable.addListener(() {
@@ -60,11 +58,20 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
     );
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     scrollController=ScrollController();
-    scrollController.addListener(() {
-      if(scrollController.offset<350&&scrollController.offset>=50&&scrollController.position.userScrollDirection==ScrollDirection.reverse)
-        scrollController.animateTo(350, duration: Duration(milliseconds: 100), curve: Curves.easeIn);
-      else if(scrollController.offset>0&&scrollController.offset<300&&scrollController.position.userScrollDirection==ScrollDirection.forward)
-        scrollController.animateTo(0, duration: Duration(milliseconds: 100), curve: Curves.easeIn);
+    // scrollController.addListener(() {
+    //   if(scrollController.offset!=0&&nestedscrollController.offset==0)
+    //     scrollController.animateTo(0, duration: Duration(milliseconds: 2), curve: Curves.easeOut);
+    //   // else if(scrollController.offset<350&&scrollController.offset>=50&&scrollController.position.userScrollDirection==ScrollDirection.reverse)
+    //   //   {scrollController.animateTo(350, duration: Duration(milliseconds: 500), curve: Curves.easeOut);}
+    //   // else if(scrollController.offset>0&&scrollController.offset<300&&scrollController.position.userScrollDirection==ScrollDirection.forward)
+    //   //   {scrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeIn);}
+    // });
+    nestedscrollController=ScrollController();
+    nestedscrollController.addListener(() {
+      if(nestedscrollController.offset<350&&nestedscrollController.offset>=50&&nestedscrollController.position.userScrollDirection==ScrollDirection.reverse)
+      {scrollController.animateTo(350, duration: Duration(milliseconds: 700), curve: Curves.easeOut);}
+      else if(nestedscrollController.offset>0&&nestedscrollController.offset<300&&nestedscrollController.position.userScrollDirection==ScrollDirection.forward)
+      {scrollController.animateTo(0, duration: Duration(milliseconds: 700), curve: Curves.easeIn);}
     });
     screenController = new AnimationController(
         duration: new Duration(milliseconds: 2000), vsync: this);
@@ -93,6 +100,10 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
       this.setState(() {});
     });
     containerGrowAnimation.addStatusListener((AnimationStatus status) {});
+    buttondisappearanim=new SizeTween(
+      begin: Size.fromRadius(15),
+      end:Size.fromRadius(0.0),
+    ).animate(_buttonController);
     buttonSwingAnimation = new AlignmentTween(
       begin: Alignment.topCenter,
       end: Alignment.bottomRight,
@@ -133,10 +144,7 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
   Widget build(BuildContext context) {
     drawerOpen.addListener(() {drawerKey.currentState.openDrawer();});
     super.build(context);
-   // bool isLandscape = MediaQuery.of(context).size.aspectRatio > 1;
-  //  double headerHeight = MediaQuery.of(context).size.height * (isLandscape? .25 : .2);
     timeDilation = 0.8;
-    //  Size screenSize = MediaQuery.of(context).size;
 
     return (new WillPopScope(
       onWillPop: () async {
@@ -144,6 +152,38 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
       },
       child: new Scaffold(
         key: drawerKey,
+        floatingActionButton: notCR ==false?
+        animateStatus == 0
+    ? Container(
+           width: buttonGrowAnimation.value * 60,
+           height: buttonGrowAnimation.value * 60,
+      child: NeumorphicFloatingActionButton(
+            style: NeumorphicStyle(
+                shape: NeumorphicShape.concave,
+                boxShape: NeumorphicBoxShape.circle(),
+                depth: buttonGrowAnimation.value * 20,
+                lightSource: LightSource.topLeft,
+                shadowLightColor: Colors.black54,
+                shadowDarkColor: Colors.orangeAccent,
+                color: Colors.white
+            ),
+            onPressed: () {
+              setState(() {});
+              animateStatus = 1;
+              _playAnimation();
+            },
+        child:Padding(
+          padding: EdgeInsets.only(left: buttonGrowAnimation.value * 40.0/12,top:buttonGrowAnimation.value * 40.0/4),
+          child: NeumorphicIcon(
+            Icons.add,
+             size: buttonGrowAnimation.value * 40.0,
+            style: NeumorphicStyle(color: Colors.orange,lightSource: LightSource.topLeft,depth: buttonGrowAnimation.value * 40,shadowDarkColor: Colors.black,shadowLightColor: Colors.black38),
+          ),
+        ),
+      ),
+    )
+        : new StaggerAnimation(buttonController: _buttonController.view)
+        :null,
         drawerEdgeDragWidth: 100,
         drawerDragStartBehavior: DragStartBehavior.down,
         drawer: NavigationDrawer(),
@@ -154,51 +194,44 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
               fadeScreenAnimation: fadeScreenAnimation,
               containerGrowAnimation: containerGrowAnimation,
             ),
-            CustomScrollView(
+            NestedScrollView(
+            //  shrinkWrap: true,
               controller: scrollController,
-               slivers:  [
-                  TransitionAppBar(title: Text(user.displayName)),
+               //slivers:  [
+              headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) { return [TransitionAppBar(title: Text(user.displayName)),]; },
+        body:  TimeTableList(nestedscrollController,a,scrollController),
                //  DrinkRewardsListDemo(),
                //],
-                 new SliverList(
-                  delegate: SliverChildBuilderDelegate((context,index){
-                      while(comingEvents!=null&&index<1&&comingEvents.length!=0){
-                        return TimeTableList(scrollController,a);
-                       // return ListViewContent(listTileWidth: listTileWidth,listSlideAnimation: listSlideAnimation,listSlidePosition: listSlidePosition,);
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-              ]
+               //   new SliverList(
+               //    delegate: SliverChildBuilderDelegate((context,index){
+               //        while(comingEvents!=null&&index<1&&comingEvents.length!=0){
+               //
+               //         // return ListViewContent(listTileWidth: listTileWidth,listSlideAnimation: listSlideAnimation,listSlidePosition: listSlidePosition,);
+               //        }
+               //        return null;
+               //      },
+               //    ),
+               //  ),
+         //     ]
             ),
+
             new FadeBox(
               fadeScreenAnimation: fadeScreenAnimation,
               containerGrowAnimation: containerGrowAnimation,
             ),
-            if(notCR ==false)
-            animateStatus == 0
-                ? new Align(
-              alignment: Alignment.bottomRight,
-                child: new InkWell(
-                    splashColor: Colors.white,
-                    highlightColor: Colors.white,
-                    onTap: () {
-                      setState(() {});
-                      animateStatus = 1;
-                      _playAnimation();
-
-                    },
-                    child: new AddButton(
-                      buttonGrowAnimation: buttonGrowAnimation,
-                    )))
-                : new StaggerAnimation(buttonController: _buttonController.view),
           ],
         ),
       ),
     ));
   }
-
+// initManualEvents()async{
+//     var snaps=await Firestore.instance.collection('ManualEvents').getDocuments();
+//     snaps.documents.forEach((element) {
+//       comingEvents.add(ManualEvent(name:element.data['name'],summary: element.data['summary'],Doc_url: element.data['urls'],lastDate: element.data['lastdata']
+//       ));
+//     });
+//
+// }
   @override
   bool get wantKeepAlive => true;
 }

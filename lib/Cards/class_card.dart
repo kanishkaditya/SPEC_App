@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:spec_app/Components/Animations/liquid_painter.dart';
 import 'package:spec_app/Components/ParallaxImageGen.dart';
-
 import 'package:spec_app/Components/rounded_shadow.dart';
 import 'package:spec_app/Components/syles.dart';
 import 'package:spec_app/Objects/Class.dart';
@@ -188,13 +187,6 @@ class _ClassCardState extends State<ClassCard> with TickerProviderStateMixin {
               widget.classData.title,
               style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.w500)
             ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(left:10,top:10),
-          child: Text(
-              "Time :- "+widget.classData.subtitle,
-              style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.w500)
           ),
         ),
         if(widget.classData.isToday)

@@ -45,6 +45,8 @@ dependencies:
   file_picker: ^2.1.5+1
   uuid: ^2.2.2
   sa_v1_migration: ^1.1.2
+  sticky_infinite_list: 3.0.1
+  flutter_neumorphic: ^3.0.3
   intl: ^0.16.1
 dev_dependencies:
   flutter_test:
