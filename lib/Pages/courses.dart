@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spec_app/Components/CustomWidget/search.dart';
+import 'package:spec_app/Components/Navdrawer/navigationDrawer.dart';
 
 class courses extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class _coursesState extends State<courses> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer:NavigationDrawer(),
         body: Stack(
           children: <Widget>[
             Container(

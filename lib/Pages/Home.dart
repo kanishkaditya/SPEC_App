@@ -18,8 +18,6 @@ import 'package:spec_app/Components/Navdrawer/navigationDrawer.dart';
 import 'package:spec_app/main.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 
-
-
 List comingEvents=[];
 DateTime selectedDay=DateTime.now();
 
@@ -199,20 +197,7 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
               controller: scrollController,
                //slivers:  [
               headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) { return [TransitionAppBar(title: Text(user.displayName)),]; },
-        body:  TimeTableList(nestedscrollController,a,scrollController),
-               //  DrinkRewardsListDemo(),
-               //],
-               //   new SliverList(
-               //    delegate: SliverChildBuilderDelegate((context,index){
-               //        while(comingEvents!=null&&index<1&&comingEvents.length!=0){
-               //
-               //         // return ListViewContent(listTileWidth: listTileWidth,listSlideAnimation: listSlideAnimation,listSlidePosition: listSlidePosition,);
-               //        }
-               //        return null;
-               //      },
-               //    ),
-               //  ),
-         //     ]
+              body:  TimeTableList(nestedscrollController,a,scrollController),
             ),
 
             new FadeBox(
@@ -224,14 +209,6 @@ class HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMix
       ),
     ));
   }
-// initManualEvents()async{
-//     var snaps=await Firestore.instance.collection('ManualEvents').getDocuments();
-//     snaps.documents.forEach((element) {
-//       comingEvents.add(ManualEvent(name:element.data['name'],summary: element.data['summary'],Doc_url: element.data['urls'],lastDate: element.data['lastdata']
-//       ));
-//     });
-//
-// }
   @override
   bool get wantKeepAlive => true;
 }

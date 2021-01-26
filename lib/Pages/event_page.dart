@@ -5,6 +5,7 @@ import 'package:flutter_animation_set/widget/transition_animations.dart';
 import 'package:spec_app/Cards/Card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:spec_app/Components/Animations/star_field.dart';
+import 'package:spec_app/Components/Navdrawer/navigationDrawer.dart';
 import 'package:spec_app/Objects/Event.dart';
 
 List<Event> events = [];
@@ -26,52 +27,56 @@ class _EventsState extends State<Event_Page> with TickerProviderStateMixin,Autom
 
   Widget _buildList() {
     int starCount = 400;
-        return Stack(
-         // direction: Axis.vertical,
-          children: <Widget>[
-            StarField(starSpeed: 0.5, starCount: starCount ),
-          StreamBuilder<QuerySnapshot>(
-            stream: Firestore.instance.collection('Events').snapshots(),
-            builder: (BuildContext context,
-                AsyncSnapshot<QuerySnapshot> querySnapshot) {
-              if (querySnapshot.hasError) return Text("Some Error");
-              if (querySnapshot.connectionState == ConnectionState.waiting) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  return Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        duration: Duration(seconds: 2),
-                        content: Row(
-                          children: <Widget>[
-                          YYWave(),
-                          SizedBox(width: 50),
-                          Text('loading....')
-                      ],
-                    ),
-                    backgroundColor: Colors.orangeAccent,
-                  ));
-                });
-                return Container(color:Colors.transparent);
-              } else {
-                final list = querySnapshot.data.documents;
-                list.forEach((element) {
-                  events.add(Event(element.data));
-                });
-                return Container(
-                  color: Colors.transparent,
-                  child: ListView.builder(
-                      itemCount: events.length,
-                      physics: BouncingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Cards(
-                            event: events[index],
-                            onClick: () => _handleclickedCard(index),
-                          ); }
-
+        return Scaffold(
+          appBar: AppBar(backgroundColor: Colors.white.withOpacity(0.0),elevation: 0,iconTheme: IconTheme.of(context),),
+          drawer: NavigationDrawer(),
+          drawerEdgeDragWidth: 150,
+          body: Stack(
+            children: <Widget>[
+              StarField(starSpeed: 0.5, starCount: starCount ),
+            StreamBuilder<QuerySnapshot>(
+              stream: Firestore.instance.collection('Events').snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> querySnapshot) {
+                if (querySnapshot.hasError) return Text("Some Error");
+                if (querySnapshot.connectionState == ConnectionState.waiting) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    return Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          duration: Duration(seconds: 2),
+                          content: Row(
+                            children: <Widget>[
+                            YYWave(),
+                            SizedBox(width: 50),
+                            Text('loading....')
+                        ],
                       ),
-                );}
-            }
-            ),
-          ],
+                      backgroundColor: Colors.orangeAccent,
+                    ));
+                  });
+                  return Container(color:Colors.transparent);
+                } else {
+                  final list = querySnapshot.data.documents;
+                  list.forEach((element) {
+                    events.add(Event(element.data));
+                  });
+                  return Container(
+                    color: Colors.transparent,
+                    child: ListView.builder(
+                        itemCount: events.length,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Cards(
+                              event: events[index],
+                              onClick: () => _handleclickedCard(index),
+                            ); }
+
+                        ),
+                  );}
+              }
+              ),
+            ],
+          ),
         );
   }
 

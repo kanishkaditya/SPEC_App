@@ -1,11 +1,10 @@
 import 'package:spec_app/Components/Animations/star_field.dart';
 import 'package:spec_app/Components/CustomWidget/fade_route_builder.dart';
 import 'package:spec_app/Components/CustomWidget/nested_navigator.dart';
-
 import 'package:flutter/material.dart';
+import 'package:spec_app/Components/Navdrawer/navigationDrawer.dart';
 import 'package:spec_app/Components/ResultTab/Result_list_view.dart';
 import 'package:spec_app/Components/ResultTab/result_detail_view.dart';
-
 
 class ResultList extends StatefulWidget {
   @override
@@ -67,6 +66,8 @@ class _ResultListState extends State<ResultList> with TickerProviderStateMixin {
     int starCount = 400;
     //The main content for the app is a Stack, with the StarField as a constant background element, and a Nested Navigator to handle content transitions
     return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.transparent,elevation: 0,iconTheme: IconTheme.of(context),),
+      drawer:NavigationDrawer(),
       body: Stack(
         children: <Widget>[
           //Wrap stars in a ValueListenableBuilder so it will get rebuilt whenever the _speedValue changes

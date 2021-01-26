@@ -1,16 +1,15 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spec_app/Components/ResultTab/ResultList.dart';
 import 'package:spec_app/Helper/AuthService.dart';
-import 'package:spec_app/Helper/Handler.dart';
 import 'package:spec_app/Objects/ManualEvent.dart';
 import 'package:spec_app/Pages/courses.dart';
+import 'package:spec_app/Pages/event_page.dart';
 import 'package:spec_app/Pages/loginPage.dart';
 import 'package:spec_app/Pages/manual_events.dart';
 import 'package:spec_app/Pages/register.dart';
+import 'Pages/Home.dart';
 
 AuthService service;
 FirebaseUser user;
@@ -40,13 +39,14 @@ void main() async {
     debugShowCheckedModeBanner: false,
     routes: {
       '/LoginPage': (context) => LoginPage(title: 'Login Page'),
-      '/Handler': (context) => Handler(),
       '/Register': (context) => Register(),
       '/Courses': (context) => courses(),
       '/Result':(context)=>ResultList(),
       '/addEvents' : (context) => addEvents(),
+      '/Home':(context)=>HomeScreen(),
+      '/Events':(context)=>Event_Page(),
     },
-    initialRoute: isLoggedIn ? '/Handler' : '/LoginPage',
+    initialRoute: isLoggedIn ? '/Home' : '/LoginPage',
   ));
     
 }
