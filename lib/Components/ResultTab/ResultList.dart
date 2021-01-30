@@ -39,21 +39,23 @@ class _ResultListState extends State<ResultList> with TickerProviderStateMixin {
     //This will be played each time we load a detail page, to create a flying through space transition effect
     _starAnimSequence = TweenSequence([
       TweenSequenceItem<double>(
-        tween: Tween<double>(begin: idleSpeed, end: -2).chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween<double>(begin: idleSpeed, end: -2)
+            .chain(CurveTween(curve: Curves.easeOut)),
         weight: 20.0,
       ),
       TweenSequenceItem<double>(
-        tween: Tween<double>(begin: -2, end: 20).chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween<double>(begin: -2, end: 20)
+            .chain(CurveTween(curve: Curves.easeOut)),
         weight: 30.0,
       ),
       TweenSequenceItem<double>(
-        tween: Tween<double>(begin: 20, end: 0).chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween<double>(begin: 20, end: 0)
+            .chain(CurveTween(curve: Curves.easeOut)),
         weight: 50.0,
       )
     ]).animate(_starAnimController);
     super.initState();
   }
-
 
   @override
   void dispose() {
@@ -66,8 +68,12 @@ class _ResultListState extends State<ResultList> with TickerProviderStateMixin {
     int starCount = 400;
     //The main content for the app is a Stack, with the StarField as a constant background element, and a Nested Navigator to handle content transitions
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent,elevation: 0,iconTheme: IconTheme.of(context),),
-      drawer:NavigationDrawer(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconTheme.of(context),
+      ),
+      drawer: NavigationDrawer(),
       body: Stack(
         children: <Widget>[
           //Wrap stars in a ValueListenableBuilder so it will get rebuilt whenever the _speedValue changes
@@ -75,7 +81,7 @@ class _ResultListState extends State<ResultList> with TickerProviderStateMixin {
             valueListenable: _speedValue,
             builder: (context, value, child) {
               //Scrolling star background
-              return StarField(starSpeed: value, starCount: starCount );
+              return StarField(starSpeed: value, starCount: starCount);
             },
           ),
           //Main content
@@ -105,9 +111,9 @@ class _ResultListState extends State<ResultList> with TickerProviderStateMixin {
         //Pass a time value into the content view, so it knows how long to delay the fadeIn. This allows us to choreograph the star animation, with the page content, without a direct dependency
         contentDelay: starAnimDurationIn + 1000,
         //When the back button is tapped in the detail view, pop the nested navigator and reverse the animation controller for the stars
-        onBackTap: (){
-         _navigationStackKey.currentState.pop();
-         _reverseStarAnim();
+        onBackTap: () {
+          _navigationStackKey.currentState.pop();
+          _reverseStarAnim();
         },
         index: args.index,
       );
@@ -127,24 +133,25 @@ class _ResultListState extends State<ResultList> with TickerProviderStateMixin {
   void _handleListScroll(delta) {
     setState(() {
       if (delta == 0) {
-        _speedValue.value = idleSpeed; //If we've stopped scrolling, revert to the idle speed
+        _speedValue.value =
+            idleSpeed; //If we've stopped scrolling, revert to the idle speed
       } else {
-        _speedValue.value = delta.clamp(-maxSpeed, maxSpeed); //clamp scrollDelta to min/max values
+        _speedValue.value = delta.clamp(
+            -maxSpeed, maxSpeed); //clamp scrollDelta to min/max values
       }
     });
   }
 
   //When an item in the list is tapped, push a Detail view onto the navigator. Pass along the data as as route argument.
-  void _handleListItemTap(String data,int index) {
+  void _handleListItemTap(String data, int index) {
     //Add details page to Navigator
     _navigationStackKey.currentState.pushNamed(
-     ResultDetailView.route,
-      arguments: _DetailViewRouteArguments(data,index),
+      ResultDetailView.route,
+      arguments: _DetailViewRouteArguments(data, index),
     );
     //Start star transition
     _starAnimController.forward(from: 0);
   }
-
 
   void _reverseStarAnim() {
     if (_starAnimController.isAnimating) {
@@ -159,5 +166,5 @@ class _DetailViewRouteArguments {
   final String data;
   final int index;
 
-  _DetailViewRouteArguments(this.data,this.index);
+  _DetailViewRouteArguments(this.data, this.index);
 }

@@ -23,7 +23,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             sigmaX: 10.0,
             sigmaY: 10.0,
           ),
-          child: Column(
+          child: ListView(
             children: [
               Container(
                 child: Padding(
@@ -76,7 +76,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onTap: () {
                   if (index != 1) {
                     index = 1;
-                    Navigator.of(context).pushReplacementNamed("/Home");
+                    Navigator.of(context).pushNamed("/Home");
                   }
                 },
                 leading: Icon(
@@ -90,7 +90,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.of(context).pushReplacementNamed("/mentor");
+                  Navigator.of(context).pushNamed("/mentor");
                 },
                 leading: Icon(
                   OMIcons.questionAnswer,
@@ -109,7 +109,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onTap: () {
                   if (index != 2) {
                     index = 2;
-                    Navigator.of(context).pushReplacementNamed("/Events");
+                    Navigator.of(context).pushNamed("/Events");
                   }
                 },
                 leading: Icon(
@@ -130,7 +130,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onTap: () {
                   if (index != 3) {
                     index = 3;
-                    Navigator.of(context).pushReplacementNamed("/Courses");
+                    Navigator.of(context).pushNamed("/Courses");
                   }
                 },
                 leading: Icon(
@@ -149,7 +149,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onTap: () {
                   if (index != 4) {
                     index = 4;
-                    Navigator.pushReplacementNamed(context, '/Result');
+                    Navigator.pushNamed(context, '/Result');
                   }
                 },
                 leading: Icon(
