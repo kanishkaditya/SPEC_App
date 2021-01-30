@@ -88,6 +88,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
+              SizedBox(
+                height: 20.0,
+              ),
               ListTile(
                 onTap: () {
                   Navigator.of(context).pushNamed("/mentor");
@@ -103,13 +106,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ),
 
               SizedBox(
-                height: 15.0,
+                height: 20.0,
               ),
               ListTile(
                 onTap: () {
                   if (index != 2) {
                     index = 2;
-                    Navigator.of(context).pushNamed("/Events");
+                    Navigator.of(context).pushReplacementNamed("/Events");
                   }
                 },
                 leading: Icon(
@@ -128,10 +131,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               //and let's copy that and modify it
               ListTile(
                 onTap: () {
-                  if (index != 3) {
-                    index = 3;
                     Navigator.of(context).pushNamed("/Courses");
-                  }
                 },
                 leading: Icon(
                   Icons.book,
@@ -149,7 +149,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onTap: () {
                   if (index != 4) {
                     index = 4;
-                    Navigator.pushNamed(context, '/Result');
+                    Navigator.pushReplacementNamed(context, '/Result');
                   }
                 },
                 leading: Icon(
