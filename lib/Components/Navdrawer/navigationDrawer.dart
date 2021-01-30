@@ -9,19 +9,21 @@ class NavigationDrawer extends StatefulWidget {
   @override
   _NavigationDrawerState createState() => _NavigationDrawerState();
 }
-int index=1;
-class _NavigationDrawerState extends State<NavigationDrawer>{
+
+int index = 1;
+
+class _NavigationDrawerState extends State<NavigationDrawer> {
   @override
   Widget build(BuildContext context) {
     return ClipRect(
       child: Container(
-        width: MediaQuery.of(context).size.width*0.8,
+        width: MediaQuery.of(context).size.width * 0.8,
         child: BackdropFilter(
           filter: ImageFilter.blur(
             sigmaX: 10.0,
             sigmaY: 10.0,
           ),
-          child: Column(
+          child: ListView(
             children: [
               Container(
                 child: Padding(
@@ -43,7 +45,7 @@ class _NavigationDrawerState extends State<NavigationDrawer>{
                         user.displayName,
                         style: TextStyle(
                           fontSize: 22.0,
-                          color:Colors.black,
+                          color: Colors.black,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -52,7 +54,11 @@ class _NavigationDrawerState extends State<NavigationDrawer>{
                       ),
                       NeumorphicText(
                         user.email,
-                        style: NeumorphicStyle(lightSource: LightSource.topLeft,depth: 20,shadowLightColor: Colors.black38,shadowDarkColor: Colors.black),
+                        style: NeumorphicStyle(
+                            lightSource: LightSource.topLeft,
+                            depth: 20,
+                            shadowLightColor: Colors.black38,
+                            shadowDarkColor: Colors.black),
                         textStyle: NeumorphicTextStyle(
                           fontSize: 16.0,
                           //color:Colors.black,
@@ -68,31 +74,52 @@ class _NavigationDrawerState extends State<NavigationDrawer>{
               ),
               ListTile(
                 onTap: () {
-                  if(index!=1){
-                    index=1;
-                  Navigator.of(context).pushReplacementNamed("/Home");}
+                  if (index != 1) {
+                    index = 1;
+                    Navigator.of(context).pushNamed("/Home");
+                  }
                 },
                 leading: Icon(
                   OMIcons.home,
                   color: Colors.white,
                 ),
-                title: Text("Home",style:TextStyle(color:Colors.white),),
-              ),
-              SizedBox(
-                height: 20.0,
+                title: Text(
+                  "Home",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               ListTile(
                 onTap: () {
-                  if(index!=2)
-                    {
-                      index=2;
-                  Navigator.of(context).pushReplacementNamed("/Events");}
+                  Navigator.of(context).pushNamed("/mentor");
+                },
+                leading: Icon(
+                  OMIcons.questionAnswer,
+                  color: Colors.white,
+                ),
+                title: Text(
+                  "Mentors",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+
+              SizedBox(
+                height: 15.0,
+              ),
+              ListTile(
+                onTap: () {
+                  if (index != 2) {
+                    index = 2;
+                    Navigator.of(context).pushNamed("/Events");
+                  }
                 },
                 leading: Icon(
                   OMIcons.image,
                   color: Colors.white,
                 ),
-                title: Text("Events",style:TextStyle(color:Colors.white),),
+                title: Text(
+                  "Events",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               SizedBox(
                 height: 20.0,
@@ -101,31 +128,38 @@ class _NavigationDrawerState extends State<NavigationDrawer>{
               //and let's copy that and modify it
               ListTile(
                 onTap: () {
-                  if(index!=3)
-                    {
-                      index=3;
-                  Navigator.of(context).pushReplacementNamed("/Courses");}
+                  if (index != 3) {
+                    index = 3;
+                    Navigator.of(context).pushNamed("/Courses");
+                  }
                 },
                 leading: Icon(
                   Icons.book,
                   color: Colors.white,
                 ),
-                title: Text("Study Material",style:TextStyle(color:Colors.white),),
+                title: Text(
+                  "Study Material",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               SizedBox(
                 height: 20.0,
               ),
               ListTile(
                 onTap: () {
-                  if(index!=4)
-                  {index=4;
-                    Navigator.pushReplacementNamed(context, '/Result');}
-                  },
+                  if (index != 4) {
+                    index = 4;
+                    Navigator.pushNamed(context, '/Result');
+                  }
+                },
                 leading: Icon(
                   Icons.menu_book_rounded,
                   color: Colors.white,
                 ),
-                title: Text("Results",style: TextStyle(color:Colors.white),),
+                title: Text(
+                  "Results",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               SizedBox(
                 height: 20.0,
@@ -136,7 +170,10 @@ class _NavigationDrawerState extends State<NavigationDrawer>{
                   Icons.settings,
                   color: Colors.white,
                 ),
-                title: Text("Settings",style: TextStyle(color:Colors.white),),
+                title: Text(
+                  "Settings",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               SizedBox(
                 height: 20.0,
@@ -147,7 +184,10 @@ class _NavigationDrawerState extends State<NavigationDrawer>{
                   Icons.help,
                   color: Colors.white,
                 ),
-                title: Text("About SPEC",style:TextStyle(color:Colors.white),),
+                title: Text(
+                  "About SPEC",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),

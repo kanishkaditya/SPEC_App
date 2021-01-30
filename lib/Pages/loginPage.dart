@@ -74,154 +74,153 @@ class _LoginPage extends State<LoginPage> with TickerProviderStateMixin {
     TextStyle linkStyle = TextStyle(color: Colors.blue);
     return Scaffold(
         body: Container(
-          decoration: BoxDecoration(gradient: GradientUtil.greenRed()),
-          child: Column(
-            children: <Widget>[
-              Container(
-
-                // alignment: Alignment.center,
-                padding: EdgeInsets.only(
-                     top: MediaQuery.of(context).size.height * 0.2),
-                child: Column(
-                  children: [
-                    Box(),
-                    // Text('Welcome',
-                    //     style: TextStyle(fontFamily: 'Montserrat', fontSize: 30)),
-                    Form(
-                      key: formKey,
-                      autovalidateMode: AutovalidateMode.always,
-                      child: Column(
-                        children: <Widget>[
-                          CustomTextField(
-                              icon: Icon(Icons.email),
-                              onChanged: (input) => _email = input,
-                              obsecure: false,
-                              hint: 'Email',
-                              validator: (input) {
-                                if (!isvalid) {
-                                  return " ";
-                                }
-                                return !RegExp(
-                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                        .hasMatch(input)
-                                    ? "*Please enter a valid email address"
-                                    : null;
-                              }),
-                          CustomTextField(
-                            icon: Icon(Icons.lock),
-                            obsecure: true,
-                            onChanged: (input) => {_pass = input},
-                            hint: 'Password',
-                            validator: (input) {
-                              if (!isPasswordValid) {
-                                isPasswordValid = true;
-                                return "*Please check your password";
-                              }
-                              if (!isvalid) {
-                                isvalid = true;
-                                return "*please check your email and Password";
-                              }
-                              if (isvalid && input.isEmpty)
-                                return "*Required";
-                              else
-                                return null;
-                            },
-                          ),
-                        ],
+      decoration: BoxDecoration(gradient: GradientUtil.greenRed()),
+      child: Column(
+        children: <Widget>[
+          Container(
+            // alignment: Alignment.center,
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+            child: Column(
+              children: [
+                Box(),
+                // Text('Welcome',
+                //     style: TextStyle(fontFamily: 'Montserrat', fontSize: 30)),
+                Form(
+                  key: formKey,
+                  autovalidateMode: AutovalidateMode.always,
+                  child: Column(
+                    children: <Widget>[
+                      CustomTextField(
+                          icon: Icon(Icons.email),
+                          onChanged: (input) => _email = input,
+                          obsecure: false,
+                          hint: 'Email',
+                          validator: (input) {
+                            if (!isvalid) {
+                              return " ";
+                            }
+                            return !RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(input)
+                                ? "*Please enter a valid email address"
+                                : null;
+                          }),
+                      CustomTextField(
+                        icon: Icon(Icons.lock),
+                        obsecure: true,
+                        onChanged: (input) => {_pass = input},
+                        hint: 'Password',
+                        validator: (input) {
+                          if (!isPasswordValid) {
+                            isPasswordValid = true;
+                            return "*Please check your password";
+                          }
+                          if (!isvalid) {
+                            isvalid = true;
+                            return "*please check your email and Password";
+                          }
+                          if (isvalid && input.isEmpty)
+                            return "*Required";
+                          else
+                            return null;
+                        },
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                //alignment: Alignment.center,
-                 padding: EdgeInsets.only(
-                     top: 50,),
-                //     left: MediaQuery.of(context).size.width * 0.38),
-                child: RichText(
-                  text: TextSpan(
-                    style: defaultStyle,
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: 'New User, Sign up',
-                          style: linkStyle,
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.pushReplacementNamed(
-                                context,
-                                '/Register',
-                              );
-                            }),
                     ],
                   ),
                 ),
-              ),
-              Container(
-                alignment: Alignment.topCenter,
-             //   height: double.infinity,
-               // width: double.infinity,
-                child: AnimatedBuilder(
-                    animation: _loginButtonController,
-                    builder: (context, child) {
-                      return Padding(
-                        padding: buttonZoomout.value == 70
-                            ? const EdgeInsets.only(top: 50)
-                            : const EdgeInsets.only(top: 0.0, bottom: 0.0),
-                        child: InkWell(
-                          onTap: () async {
-                            user = await service.SignIn(
-                                email: _email, password: _pass);
-                            if (user == null) {
-                              formKey.currentState.setState(() {
-                                isvalid = false;
-                              });
-                            } else {
-                              _playAnimation();
-                            }
-                          },
-                          child: Container(
-                              width: buttonSqueezeAnimation.value == 70
-                                  ? buttonZoomout.value
-                                  : buttonSqueezeAnimation.value,
-                              height: buttonZoomout.value == 70
-                                  ? 60.0
-                                  : buttonZoomout.value,
-                              alignment: FractionalOffset.center,
-                              decoration: BoxDecoration(
-                                color: buttonZoomout.value == 70
-                                    ? const Color.fromRGBO(247, 64, 106, 1.0)
-                                    : const Color.fromRGBO(243, 65, 106, 1.0),
-                                borderRadius: buttonZoomout.value < 400
-                                    ? new BorderRadius.all(
-                                        const Radius.circular(30.0))
-                                    : new BorderRadius.all(
-                                        const Radius.circular(0.0)),
-                              ),
-                              child: buttonSqueezeAnimation.value > 75.0
-                                  ? Text(
-                                      "Sign In",
-                                      style: new TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w300,
-                                        letterSpacing: 0.3,
-                                      ),
-                                    )
-                                  : buttonZoomout.value < 300.0
-                                      ? CircularProgressIndicator(
-                                          value: null,
-                                          strokeWidth: 1.0,
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                  Colors.white),
-                                        )
-                                      : null),
-                        ),
-                      );
-                    }),
-              )
-            ],
+              ],
+            ),
           ),
-        ));
+          Container(
+            //alignment: Alignment.center,
+            padding: EdgeInsets.only(
+              top: 50,
+            ),
+            //     left: MediaQuery.of(context).size.width * 0.38),
+            child: RichText(
+              text: TextSpan(
+                style: defaultStyle,
+                children: <TextSpan>[
+                  TextSpan(
+                      text: 'New User, Sign up',
+                      style: linkStyle,
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.pushNamed(
+                            context,
+                            '/Register',
+                          );
+                        }),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            alignment: Alignment.topCenter,
+            //   height: double.infinity,
+            // width: double.infinity,
+            child: AnimatedBuilder(
+                animation: _loginButtonController,
+                builder: (context, child) {
+                  return Padding(
+                    padding: buttonZoomout.value == 70
+                        ? const EdgeInsets.only(top: 50)
+                        : const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                    child: InkWell(
+                      onTap: () async {
+                        user = await service.SignIn(
+                            email: _email, password: _pass);
+                        if (user == null) {
+                          formKey.currentState.setState(() {
+                            isvalid = false;
+                          });
+                        } else {
+                          _playAnimation();
+                        }
+                      },
+                      child: Container(
+                          width: buttonSqueezeAnimation.value == 70
+                              ? buttonZoomout.value
+                              : buttonSqueezeAnimation.value,
+                          height: buttonZoomout.value == 70
+                              ? 60.0
+                              : buttonZoomout.value,
+                          alignment: FractionalOffset.center,
+                          decoration: BoxDecoration(
+                            color: buttonZoomout.value == 70
+                                ? const Color.fromRGBO(247, 64, 106, 1.0)
+                                : const Color.fromRGBO(243, 65, 106, 1.0),
+                            borderRadius: buttonZoomout.value < 400
+                                ? new BorderRadius.all(
+                                    const Radius.circular(30.0))
+                                : new BorderRadius.all(
+                                    const Radius.circular(0.0)),
+                          ),
+                          child: buttonSqueezeAnimation.value > 75.0
+                              ? Text(
+                                  "Sign In",
+                                  style: new TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w300,
+                                    letterSpacing: 0.3,
+                                  ),
+                                )
+                              : buttonZoomout.value < 300.0
+                                  ? CircularProgressIndicator(
+                                      value: null,
+                                      strokeWidth: 1.0,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.white),
+                                    )
+                                  : null),
+                    ),
+                  );
+                }),
+          )
+        ],
+      ),
+    ));
   }
 }

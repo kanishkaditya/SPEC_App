@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spec_app/Components/CustomWidget/search.dart';
 import 'package:spec_app/Components/Navdrawer/navigationDrawer.dart';
+import 'package:spec_app/screen/videoScreen.dart';
 
 class courses extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class _coursesState extends State<courses> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      drawer:NavigationDrawer(),
+        drawer: NavigationDrawer(),
         body: Stack(
           children: <Widget>[
             Container(
@@ -48,7 +49,8 @@ class _coursesState extends State<courses> {
                       ),
                       SizedBox(height: 10),
                       SizedBox(
-                        width: size.width * .6, // it just take 60% of total width
+                        width:
+                            size.width * .6, // it just take 60% of total width
                         child: Text(
                           "Previous year papers, books, notes of first year and ECE department and books of ECE department is provided here",
                         ),
@@ -64,7 +66,12 @@ class _coursesState extends State<courses> {
                           notesBox(
                             seassionNum: 1,
                             isDone: true,
-                            press: () {},
+                            press: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => VideoScreen()));
+                            },
                           ),
                           notesBox(
                             seassionNum: 2,
@@ -102,8 +109,7 @@ class _coursesState extends State<courses> {
               ),
             ),
           ],
-        )
-    );
+        ));
   }
 }
 
@@ -157,7 +163,7 @@ class notesBox extends StatelessWidget {
                       ),
                       child: Icon(
                         Icons.play_arrow,
-                        color:  Colors.deepPurpleAccent,
+                        color: Colors.deepPurpleAccent,
                       ),
                     ),
                     SizedBox(width: 10),
