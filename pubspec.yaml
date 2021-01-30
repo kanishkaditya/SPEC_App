@@ -48,6 +48,7 @@ dependencies:
   sticky_infinite_list: 3.0.1
   flutter_neumorphic: ^3.0.3
   intl: ^0.16.1
+  youtube_player_flutter: ^6.0.3+2
 dev_dependencies:
   flutter_test:
     sdk: flutter

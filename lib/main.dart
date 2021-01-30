@@ -7,6 +7,7 @@ import 'package:spec_app/Pages/courses.dart';
 import 'package:spec_app/Pages/event_page.dart';
 import 'package:spec_app/Pages/loginPage.dart';
 import 'package:spec_app/Pages/manual_events.dart';
+import 'package:spec_app/Pages/mentor_chat.dart';
 import 'package:spec_app/Pages/register.dart';
 import 'Pages/Home.dart';
 
@@ -20,33 +21,29 @@ String rollno;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool isLoggedIn =false;
-  if(prefs.containsKey('IsLoggedInFirebase')){
-      isLoggedIn=prefs.getBool('IsLoggedInFirebase');
-    }
-  else{
-    prefs.setBool('IsLoggedInFirebase',false);
+  bool isLoggedIn = false;
+  if (prefs.containsKey('IsLoggedInFirebase')) {
+    isLoggedIn = prefs.getBool('IsLoggedInFirebase');
+  } else {
+    prefs.setBool('IsLoggedInFirebase', false);
   }
   service = AuthService();
 
-
-    if(prefs.getBool('IsLoggedInFirebase'))
-      {
-        user=await service.SignIn();
-      }
+  if (prefs.getBool('IsLoggedInFirebase')) {
+    user = await service.SignIn();
+  }
   return runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     routes: {
       '/LoginPage': (context) => LoginPage(title: 'Login Page'),
       '/Register': (context) => Register(),
       '/Courses': (context) => courses(),
-      '/Result':(context)=>ResultList(),
-      '/addEvents' : (context) => addEvents(),
-      '/Home':(context)=>HomeScreen(),
-      '/Events':(context)=>Event_Page(),
+      '/Result': (context) => ResultList(),
+      '/addEvents': (context) => addEvents(),
+      '/Home': (context) => HomeScreen(),
+      '/Events': (context) => Event_Page(),
+      '/mentor': (context) => Mentor_chat(),
     },
     initialRoute: isLoggedIn ? '/Home' : '/LoginPage',
   ));
-    
 }
-
