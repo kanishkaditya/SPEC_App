@@ -4,7 +4,7 @@
 <br />
 <p align="center">
   <a href="https://specnith.com">
-    <img src="https://nith.ac.in/spec/imgs/logo_spec.png" alt="Logo" width="150" height="80">
+    <img src="https://spec.nith.ac.in/Home-files/assets/logo2.png" alt="Logo" width="150" height="80">
   </a>
 
   <h3 align="center">SPEC-MOBILE-APPLICATION</h3>
