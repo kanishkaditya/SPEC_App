@@ -34,20 +34,11 @@
 
   <!-- ABOUT THE PROJECT -->
   ## About The Project
-<p align="center">
-<!--   <a href=""> -->
-    <img src="./screenshots/app-preface-1.png" alt="App-Preface-Image1">
-  <br/>
-    <img src="./screenshots/app-preface-2.png" alt="App-Preface-Image2">
-    <br/>
-    <img src="./screenshots/water-filling.gif" alt="Card-Folding-Gif" width="230">
-    <br/>
-    <img src="./screenshots/space.png" alt="Card-Folding-Gif" width="30">
-    <br/>
-    <img src="./screenshots/card-folding.gif" alt="Card-Folding-Gif" width="230">
-    <br/>
-<!--   </a> -->
-</p>
+  ![App-preface-1](./screenshots/app-preface-1.png)
+  ![App-preface-2](./screenshots/app-preface-2.png)
+  ![Water-filling](./screenshots/water-filling.gif)
+  ![Space](./screenshots/space.png)
+  ![Card-folding](./screenshots/card-folding.gif)
 
 * A mobile application that serves multiple purposes to the user by creating a personalized interface for every individual by letting them create their own profiles ( signup using the Google APIs ) alerts of deadlines of submissions, also we can add free resources of different Technology which we have used ourselves to help students developing different skills and extra classes will be made available since the students will be able to set up their own personal timetable with the same.  
 
